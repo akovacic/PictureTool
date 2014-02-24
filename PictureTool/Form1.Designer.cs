@@ -76,7 +76,7 @@
             this.imageToolStripMenuItem});
             this.menu.Location = new System.Drawing.Point(0, 0);
             this.menu.Name = "menu";
-            this.menu.Size = new System.Drawing.Size(692, 24);
+            this.menu.Size = new System.Drawing.Size(685, 24);
             this.menu.TabIndex = 0;
             this.menu.Text = "menuStrip1";
             // 
@@ -357,7 +357,7 @@
             this.toolStripLabel2.Name = "toolStripLabel2";
             this.toolStripLabel2.Size = new System.Drawing.Size(84, 22);
             this.toolStripLabel2.Text = "Selected color:";
-            // 
+            //
             // selectedColorButton
             // 
             this.selectedColorButton.BackColor = System.Drawing.Color.Black;
@@ -417,7 +417,6 @@
             this.MainMenuStrip = this.menu;
             this.Name = "Form1";
             this.Text = "untitled";
-            this.WindowState = System.Windows.Forms.FormWindowState.Maximized;
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.Form1_FormClosing);
             this.Load += new System.EventHandler(this.Form1_Load);
             this.menu.ResumeLayout(false);
