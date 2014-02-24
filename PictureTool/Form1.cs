@@ -84,34 +84,33 @@ namespace PictureTool
         private void saveImage()
         {
             Bitmap picture = bitmap();
-
             SaveFileDialog saveFileDialog = new SaveFileDialog();
             saveFileDialog.FileName = this.Text;
             saveFileDialog.Filter = "JPG Files (*.jpg)|*.jpg|JPEG Files (*.jpeg)|*.jpeg|PNG Files (*.png)|*.png|GIF Files (*.gif)|*.gif|BMP Files (*.bmp)|*.bmp";
             if (saveFileDialog.ShowDialog() == System.Windows.Forms.DialogResult.OK)
             {
-                if (saveFileDialog.FileName.Contains(".jpg") || saveFileDialog.FileName.Contains(".jpeg"))
-                {
-                    picture.Save(saveFileDialog.FileName, ImageFormat.Jpeg);
-                }
-                else if (saveFileDialog.FileName.Contains(".png"))
-                {
-                    picture.Save(saveFileDialog.FileName, ImageFormat.Png);
-                }
-                else if (saveFileDialog.FileName.Contains(".gif"))
-                {
-                    picture.Save(saveFileDialog.FileName, ImageFormat.Gif);
-                }
-                else if (saveFileDialog.FileName.Contains(".bmp"))
-                {
-                    picture.Save(saveFileDialog.FileName, ImageFormat.Bmp);
-                }
-
-                this.Text = saveFileDialog.FileName;
-                saved = true;
+               if (saveFileDialog.FileName.Contains(".jpg") || saveFileDialog.FileName.Contains(".jpeg"))
+               {
+                   picture.Save(saveFileDialog.FileName, ImageFormat.Jpeg);
+               }
+               else if (saveFileDialog.FileName.Contains(".png"))
+               {
+                   picture.Save(saveFileDialog.FileName, ImageFormat.Png);
+               }
+               else if (saveFileDialog.FileName.Contains(".gif"))
+               {
+                   picture.Save(saveFileDialog.FileName, ImageFormat.Gif);
+               }
+               else if (saveFileDialog.FileName.Contains(".bmp"))
+               {
+                   picture.Save(saveFileDialog.FileName, ImageFormat.Bmp);
+               }
+               this.Text = saveFileDialog.FileName;
+               saved = true;
             }
-
             pictureBox1.Image = (Image)picture;
+           
+            
         }
 
         private void undo()
