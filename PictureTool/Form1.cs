@@ -71,6 +71,8 @@ namespace PictureTool
             openFileDialog.Filter = "JPG Files (*.jpg)|*.jpg|JPEG Files (*.jpeg)|*.jpeg|PNG Files (*.png)|*.png|GIF Files (*.gif)|*.gif|BMP Files (*.bmp)|*.bmp";
             if (openFileDialog.ShowDialog() == System.Windows.Forms.DialogResult.OK)
             {
+                //Graphics graph = canvas.CreateGraphics();
+                //graph.DrawImage((Image)Image.FromFile(openFileDialog.FileName).Clone(), canvas.Location);
                 canvas.Image = (Image)Image.FromFile(openFileDialog.FileName).Clone();
                 this.Text = openFileDialog.FileName;
                 saved = true;
@@ -371,6 +373,7 @@ namespace PictureTool
                         graphics.FillRectangle(new SolidBrush(Color.White), start.X - size / 2, start.Y - size / 2, size, size);
                         break;
                 }
+               
             }
         }
 
@@ -424,7 +427,7 @@ namespace PictureTool
                         if (filled) graphics.FillEllipse(new SolidBrush(color), frame);
                         break;
                 }
-
+                
                 undoButtonQuick.Enabled = true;
                 undoButtonMenu.Enabled = true;
                 Bitmap picture = BitmapFromCanvas();
@@ -432,11 +435,6 @@ namespace PictureTool
             }
 
             draw = false;
-        }
-
-        private void pictureBox1_Paint(object sender, PaintEventArgs e)
-        {
-
         }
 
         private void toolStripButton15_Click(object sender, EventArgs e)
@@ -480,6 +478,56 @@ namespace PictureTool
         private void undoToolStripMenuItem_Click(object sender, EventArgs e)
         {
             Undo();
+        }
+
+        private void Sepia_Click(object sender, EventArgs e)
+        {
+            undoButtonQuick.Enabled = true;
+            undoButtonMenu.Enabled = true;
+            Bitmap picture = BitmapFromCanvas();
+            history.Push(picture);
+            float[][] sepiaValues = {
+            new float[]{.393f, .349f, .272f, 0, 0},
+            new float[]{.769f, .686f, .534f, 0, 0},
+            new float[]{.189f, .168f, .131f, 0, 0},
+            new float[]{0, 0, 0, 1, 0},
+            new float[]{0, 0, 0, 0, 1}};
+            System.Drawing.Imaging.ColorMatrix sepiaMatrix = new System.Drawing.Imaging.ColorMatrix(sepiaValues);
+            System.Drawing.Imaging.ImageAttributes IA = new System.Drawing.Imaging.ImageAttributes();
+            IA.SetColorMatrix(sepiaMatrix);
+            Bitmap sepiaEffect = BitmapFromCanvas();
+            using (Graphics G = Graphics.FromImage(sepiaEffect))
+            {
+                G.DrawImage(canvas.Image, new Rectangle(0, 0, sepiaEffect.Width, sepiaEffect.Height), 0, 0, sepiaEffect.Width, sepiaEffect.Height, GraphicsUnit.Pixel, IA);
+            }
+            canvas.Image = sepiaEffect;
+        }
+
+        private void grayScale_Click(object sender, EventArgs e)
+        {
+            undoButtonQuick.Enabled = true;
+            undoButtonMenu.Enabled = true;
+            Bitmap picture = BitmapFromCanvas();
+            history.Push(picture);
+            Bitmap newBitmap = new Bitmap(canvas.Image.Width, canvas.Image.Height);
+
+            //get a graphics object from the new image
+            Graphics g = Graphics.FromImage(newBitmap);
+            ColorMatrix colorMatrix = new ColorMatrix(
+               new float[][] 
+                {
+                     new float[] {0.299f, 0.299f, 0.299f, 0, 0},
+                     new float[] {0.587f, 0.587f, 0.587f, 0, 0},
+                     new float[] {.114f, .114f, .114f, 0, 0},
+                     new float[] {0, 0, 0, 1, 0},
+                     new float[] {0, 0, 0, 0, 1}
+                });
+
+            ImageAttributes attributes = new ImageAttributes();
+            attributes.SetColorMatrix(colorMatrix);
+            g.DrawImage(canvas.Image, new Rectangle(0, 0, canvas.Image.Width, canvas.Image.Height),
+               0, 0, canvas.Image.Width, canvas.Image.Height, GraphicsUnit.Pixel, attributes);
+            canvas.Image = newBitmap;
         }
     }
 }
