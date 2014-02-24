@@ -15,7 +15,7 @@ namespace PictureTool
 
     public partial class Form1 : Form
     {
-        private bool draw, filled, saved, pictureOpened;
+        private bool draw, filled, dirty, pictureOpened;
         private Color color;
         private Tool tool;
         private int size;
@@ -25,111 +25,8 @@ namespace PictureTool
         public Form1()
         {
             InitializeComponent();
-            saved = true;
             tool = Tool.Pencil;
-            pictureOpened = false;
             color = Color.Black;
-        }
-
-        private Rectangle PointRectangle(Point p1, Point p2)
-        {
-            Rectangle rectangle = new Rectangle();
-            rectangle.X = (p1.X > p2.X ? p2.X : p1.X);
-            rectangle.Y = (p1.Y > p2.Y ? p2.Y : p1.Y);
-            rectangle.Width = Math.Abs(p1.X - p2.X);
-            rectangle.Height = Math.Abs(p1.Y - p2.Y);
-
-            return rectangle;
-        }
-
-        private Bitmap BitmapFromCanvas()
-        { 
-            Bitmap bitmap = new Bitmap(canvas.Width, canvas.Height);
-            Graphics graphics = Graphics.FromImage(bitmap);
-            Rectangle rectangle = canvas.RectangleToScreen(canvas.ClientRectangle);
-            graphics.CopyFromScreen(rectangle.Location, Point.Empty, canvas.Size);
-            graphics.Dispose();
-
-            return bitmap;
-        }
-
-        private void NewImage()
-        {
-            canvas.Refresh();
-            canvas.Image = null;
-            this.Text = "untitled";
-            saved = true;
-            undoButtonQuick.Enabled = false;
-            undoButtonMenu.Enabled = false;
-            history.Clear();
-            history.Push(BitmapFromCanvas());
-        }
-
-        private void OpenImage()
-        {
-            OpenFileDialog openFileDialog = new OpenFileDialog();
-            openFileDialog.Filter = "JPG Files (*.jpg)|*.jpg|JPEG Files (*.jpeg)|*.jpeg|PNG Files (*.png)|*.png|GIF Files (*.gif)|*.gif|BMP Files (*.bmp)|*.bmp";
-            if (openFileDialog.ShowDialog() == System.Windows.Forms.DialogResult.OK)
-            {
-                //Graphics graph = canvas.CreateGraphics();
-                //graph.DrawImage((Image)Image.FromFile(openFileDialog.FileName).Clone(), canvas.Location);
-                canvas.Image = (Image)Image.FromFile(openFileDialog.FileName).Clone();
-                this.Text = openFileDialog.FileName;
-                saved = true;
-                undoButtonQuick.Enabled = false;
-                undoButtonMenu.Enabled = false;
-                history.Clear();
-                history.Push(BitmapFromCanvas());
-                pictureOpened = true;
-            }
-        }
-
-        private void SaveImage()
-        {
-            Bitmap picture = BitmapFromCanvas();
-            SaveFileDialog saveFileDialog = new SaveFileDialog();
-            saveFileDialog.FileName = this.Text;
-            saveFileDialog.Filter = "JPG Files (*.jpg)|*.jpg|JPEG Files (*.jpeg)|*.jpeg|PNG Files (*.png)|*.png|GIF Files (*.gif)|*.gif|BMP Files (*.bmp)|*.bmp";
-            if (saveFileDialog.ShowDialog() == System.Windows.Forms.DialogResult.OK)
-            {
-               if (saveFileDialog.FileName.Contains(".jpg") || saveFileDialog.FileName.Contains(".jpeg"))
-               {
-                   picture.Save(saveFileDialog.FileName, ImageFormat.Jpeg);
-               }
-               else if (saveFileDialog.FileName.Contains(".png"))
-               {
-                   picture.Save(saveFileDialog.FileName, ImageFormat.Png);
-               }
-               else if (saveFileDialog.FileName.Contains(".gif"))
-               {
-                   picture.Save(saveFileDialog.FileName, ImageFormat.Gif);
-               }
-               else if (saveFileDialog.FileName.Contains(".bmp"))
-               {
-                   picture.Save(saveFileDialog.FileName, ImageFormat.Bmp);
-               }
-               this.Text = saveFileDialog.FileName;
-               saved = true;
-            }
-
-            canvas.Image = (Image)picture;
-        }
-
-        private void Undo()
-        {
-            saved = false;
-            history.Pop();
-            if (history.Count != 1) canvas.Image = (Image)history.Peek();
-            if (history.Count == 1)
-            {
-                undoButtonQuick.Enabled = false;
-                undoButtonMenu.Enabled = false;
-                if (!pictureOpened) NewImage();
-                else
-                {
-                    canvas.Image = (Image)Image.FromFile(this.Text).Clone();
-                }
-            }
         }
 
         private void Form1_Load(object sender, EventArgs e)
@@ -137,214 +34,59 @@ namespace PictureTool
             NewImage();
         }
 
-        private void toolStripButton6_Click(object sender, EventArgs e)
-        {
-            pictureOpened = false;
-            if (saved)
-            {
-                NewImage();
-            }
+        private void newButton_Click(object sender, EventArgs e)  { ResolveDirty(NewImage);  }
+        private void openButton_Click(object sender, EventArgs e) { ResolveDirty(OpenImage); }
+        private void saveButton_Click(object sender, EventArgs e) { SaveImage();             }
+        private void undoButton_Click(object sender, EventArgs e) { Undo();                  }
 
-            else
-            {
-                DialogResult result = MessageBox.Show("Save image?", "Picture tool", MessageBoxButtons.YesNoCancel, MessageBoxIcon.Warning);
-                if (result == DialogResult.Yes)
-                {
-                    SaveImage();
-
-                    if (saved)
-                    {
-                        NewImage();
-                    }
-                }
-
-                else if (result == DialogResult.No)
-                {
-                    NewImage();
-                }
-            }
-        }
-
-        private void toolStripButton7_Click(object sender, EventArgs e)
-        {
-            if (saved)
-            {
-                OpenImage();
-            }
-
-            else
-            {
-                DialogResult result = MessageBox.Show("Save image?", "Picture tool", MessageBoxButtons.YesNoCancel, MessageBoxIcon.Warning);
-                if (result == DialogResult.Yes)
-                {
-                    SaveImage();
-
-                    if (saved)
-                    {
-                        OpenImage();
-                    }
-                }
-
-                else if (result == DialogResult.No)
-                {
-                    OpenImage();
-                }
-            }
-        }
-
-        private void toolStripButton8_Click(object sender, EventArgs e)
-        {
-            SaveImage();
-        }
-
-        private void newToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            if (saved)
-            {
-                NewImage();
-            }
-
-            else
-            {
-                DialogResult result = MessageBox.Show("Save image?", "Picture tool", MessageBoxButtons.YesNoCancel, MessageBoxIcon.Warning);
-                if (result == DialogResult.Yes)
-                {
-                    SaveImage();
-
-                    if (saved)
-                    {
-                        NewImage();
-                    }
-                }
-
-                else if (result == DialogResult.No)
-                {
-                    NewImage();
-                }
-            }
-        }
-
-        private void saveToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            if (saved)
-            {
-                OpenImage();
-            }
-
-            else
-            {
-                DialogResult result = MessageBox.Show("Save image?", "Picture tool", MessageBoxButtons.YesNoCancel, MessageBoxIcon.Warning);
-                if (result == DialogResult.Yes)
-                {
-                    SaveImage();
-
-                    if (saved)
-                    {
-                        OpenImage();
-                    }
-                }
-
-                else if (result == DialogResult.No)
-                {
-                    OpenImage();
-                }
-            }
-        }
-
-        private void openToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            SaveImage();
-        }
-
-        private void toolStripButton1_Click(object sender, EventArgs e)
+        private void pencilButton_Click(object sender, EventArgs e)
         {
             tool = Tool.Pencil;
-
-            brushButton.Checked = false;
-            lineButton.Checked = false;
-            rectangleButton.Checked = false;
-            ellipseButton.Checked = false;
-            eraserButton.Checked = false;
-
-            toolStripLabel1.Visible = false;
-            noFillButton.Visible = false;
-            fillButton.Visible = false;
+            FocusTool(pencilButton);
         }
 
-        private void toolStripButton2_Click(object sender, EventArgs e)
+        private void brushButton_Click(object sender, EventArgs e)
         {
             tool = Tool.Brush;
             size = 10;
-
-            pencilButton.Checked = false;
-            lineButton.Checked = false;
-            rectangleButton.Checked = false;
-            ellipseButton.Checked = false;
-            eraserButton.Checked = false;
-
-            toolStripLabel1.Visible = false;
-            noFillButton.Visible = false;
-            fillButton.Visible = false;
+            FocusTool(brushButton);
         }
 
-        private void toolStripButton3_Click(object sender, EventArgs e)
+        private void lineButton_Click(object sender, EventArgs e)
         {
             tool = Tool.Line;
             size = 1;
-
-            pencilButton.Checked = false;
-            brushButton.Checked = false;
-            rectangleButton.Checked = false;
-            ellipseButton.Checked = false;
-            eraserButton.Checked = false;
-
-            toolStripLabel1.Visible = false;
-            noFillButton.Visible = false;
-            fillButton.Visible = false;
+            FocusTool(lineButton);
         }
 
-        private void toolStripButton4_Click(object sender, EventArgs e)
+        private void rectangleButton_Click(object sender, EventArgs e)
         {
             tool = Tool.Rectangle;
             size = 1;
-
-            pencilButton.Checked = false;
-            brushButton.Checked = false;
-            lineButton.Checked = false;
-            ellipseButton.Checked = false;
-            eraserButton.Checked = false;
-
-            toolStripLabel1.Visible = true;
-            noFillButton.Visible = true;
-            fillButton.Visible = true;
+            FocusTool(rectangleButton);
         }
 
-        private void toolStripButton5_Click(object sender, EventArgs e)
+        private void ellipseButton_Click(object sender, EventArgs e)
         {
             tool = Tool.Ellipse;
             size = 1;
-
-            pencilButton.Checked = false;
-            brushButton.Checked = false;
-            lineButton.Checked = false;
-            rectangleButton.Checked = false;
-            eraserButton.Checked = false;
-
-            toolStripLabel1.Visible = true;
-            noFillButton.Visible = true;
-            fillButton.Visible = true;
+            FocusTool(ellipseButton);
         }
 
-        private void toolStripButton14_Click(object sender, EventArgs e)
+        private void eraserButton_Click(object sender, EventArgs e)
         {
             tool = Tool.Eraser;
             size = 10;
+            FocusTool(eraserButton);
+        }
 
-            pencilButton.Checked = false;
+        private void FocusTool(ToolStripButton button)
+        {
             brushButton.Checked = false;
             lineButton.Checked = false;
             rectangleButton.Checked = false;
             ellipseButton.Checked = false;
+            eraserButton.Checked = false;
 
             toolStripLabel1.Visible = false;
             noFillButton.Visible = false;
@@ -358,7 +100,7 @@ namespace PictureTool
             {
                 draw = true;
                 start = end = e.Location;
-                saved = false;
+                dirty = true;
 
                 Graphics graphics = canvas.CreateGraphics();
                 switch (tool)
@@ -464,20 +206,121 @@ namespace PictureTool
 
         private void Form1_FormClosing(object sender, FormClosingEventArgs e)
         {
-            if (!saved && MessageBox.Show("Save image?", "Picture tool", MessageBoxButtons.YesNo, MessageBoxIcon.Warning) == DialogResult.Yes)
+            if (dirty && MessageBox.Show("Save image?", "Picture tool", MessageBoxButtons.YesNo, MessageBoxIcon.Warning) == DialogResult.Yes)
             {
                 SaveImage();
             }
         }
 
-        private void toolStripButton19_Click(object sender, EventArgs e)
+        private Rectangle PointRectangle(Point p1, Point p2)
         {
-            Undo();
+            Rectangle rectangle = new Rectangle();
+            rectangle.X = (p1.X > p2.X ? p2.X : p1.X);
+            rectangle.Y = (p1.Y > p2.Y ? p2.Y : p1.Y);
+            rectangle.Width = Math.Abs(p1.X - p2.X);
+            rectangle.Height = Math.Abs(p1.Y - p2.Y);
+
+            return rectangle;
         }
 
-        private void undoToolStripMenuItem_Click(object sender, EventArgs e)
+        private Bitmap BitmapFromCanvas()
         {
-            Undo();
+            Bitmap bitmap = new Bitmap(canvas.Width, canvas.Height);
+            Graphics graphics = Graphics.FromImage(bitmap);
+            Rectangle rectangle = canvas.RectangleToScreen(canvas.ClientRectangle);
+            graphics.CopyFromScreen(rectangle.Location, Point.Empty, canvas.Size);
+            graphics.Dispose();
+
+            return bitmap;
+        }
+
+        private void NewImage()
+        {
+            canvas.Refresh();
+            canvas.Image = null;
+            this.Text = "untitled";
+            ClearHistory();
+            pictureOpened = false;
+            dirty = false;
+        }
+
+        private void ClearHistory()
+        {
+            history.Clear();
+            history.Push(BitmapFromCanvas());
+            undoButtonQuick.Enabled = false;
+            undoButtonMenu.Enabled = false;
+        }
+
+        private void OpenImage()
+        {
+            OpenFileDialog openFileDialog = new OpenFileDialog();
+            openFileDialog.Filter = "JPG Files (*.jpg)|*.jpg|JPEG Files (*.jpeg)|*.jpeg|PNG Files (*.png)|*.png|GIF Files (*.gif)|*.gif|BMP Files (*.bmp)|*.bmp";
+            if (openFileDialog.ShowDialog() == System.Windows.Forms.DialogResult.OK)
+            {
+                canvas.Image = (Image)Image.FromFile(openFileDialog.FileName).Clone();
+                this.Text = openFileDialog.FileName;
+                ClearHistory();
+                pictureOpened = true;
+            }
+        }
+
+        private void SaveImage()
+        {
+            Bitmap image = BitmapFromCanvas();
+            SaveFileDialog saveFileDialog = new SaveFileDialog();
+            saveFileDialog.FileName = this.Text;
+            saveFileDialog.Filter = "JPG Files (*.jpg)|*.jpg|JPEG Files (*.jpeg)|*.jpeg|PNG Files (*.png)|*.png|GIF Files (*.gif)|*.gif|BMP Files (*.bmp)|*.bmp";
+            if (saveFileDialog.ShowDialog() == System.Windows.Forms.DialogResult.OK)
+            {
+                ImageFormat format;
+                switch (Path.GetExtension(saveFileDialog.FileName))
+                {
+                    case ".jpg":
+                    case ".jpeg": format = ImageFormat.Jpeg; break;
+                    case ".png": format = ImageFormat.Png; break;
+                    case ".gif": format = ImageFormat.Gif; break;
+                    case ".bmp": format = ImageFormat.Bmp; break;
+                    default: format = ImageFormat.Jpeg; break;
+                }
+                image.Save(saveFileDialog.FileName, format);
+                this.Text = saveFileDialog.FileName;
+                dirty = false;
+            }
+            canvas.Image = image;
+        }
+
+        private void Undo()
+        {
+            if (history.Count > 1) history.Pop();
+            if (history.Count > 1) canvas.Image = history.Peek();
+            else
+            {
+                // Workaround za malfunction na zadnjem undou.
+                if (pictureOpened) canvas.Image = (Image)Image.FromFile(this.Text).Clone();
+                else canvas.Image = null;
+
+                undoButtonQuick.Enabled = false;
+                undoButtonMenu.Enabled = false;
+            }
+        }
+
+        private void ResolveDirty(Action action)
+        {
+            if (!dirty) action();
+            else
+            {
+                switch (MessageBox.Show("Save image?", "Picture tool", MessageBoxButtons.YesNoCancel, MessageBoxIcon.Warning))
+                {
+                    case DialogResult.Yes:
+                        SaveImage();
+                        if (!dirty) action();
+                        break;
+                    case DialogResult.No:
+                        action();
+                        break;
+                }
+            }
         }
 
         private void Sepia_Click(object sender, EventArgs e)

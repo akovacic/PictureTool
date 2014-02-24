@@ -101,7 +101,7 @@
             this.newButtonMenu.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.N)));
             this.newButtonMenu.Size = new System.Drawing.Size(146, 22);
             this.newButtonMenu.Text = "New";
-            this.newButtonMenu.Click += new System.EventHandler(this.newToolStripMenuItem_Click);
+            this.newButtonMenu.Click += new System.EventHandler(this.newButton_Click);
             // 
             // openButtonMenu
             // 
@@ -111,7 +111,7 @@
             this.openButtonMenu.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.O)));
             this.openButtonMenu.Size = new System.Drawing.Size(146, 22);
             this.openButtonMenu.Text = "Open";
-            this.openButtonMenu.Click += new System.EventHandler(this.saveToolStripMenuItem_Click);
+            this.openButtonMenu.Click += new System.EventHandler(this.openButton_Click);
             // 
             // saveButtonMenu
             // 
@@ -121,7 +121,7 @@
             this.saveButtonMenu.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.S)));
             this.saveButtonMenu.Size = new System.Drawing.Size(146, 22);
             this.saveButtonMenu.Text = "Save";
-            this.saveButtonMenu.Click += new System.EventHandler(this.openToolStripMenuItem_Click);
+            this.saveButtonMenu.Click += new System.EventHandler(this.saveButton_Click);
             // 
             // editToolStripMenuItem
             // 
@@ -140,7 +140,7 @@
             this.undoButtonMenu.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.Z)));
             this.undoButtonMenu.Size = new System.Drawing.Size(144, 22);
             this.undoButtonMenu.Text = "Undo";
-            this.undoButtonMenu.Click += new System.EventHandler(this.undoToolStripMenuItem_Click);
+            this.undoButtonMenu.Click += new System.EventHandler(this.undoButton_Click);
             // 
             // imageToolStripMenuItem
             // 
@@ -195,7 +195,7 @@
             this.pencilButton.Name = "pencilButton";
             this.pencilButton.Size = new System.Drawing.Size(29, 20);
             this.pencilButton.Text = "Pencil";
-            this.pencilButton.Click += new System.EventHandler(this.toolStripButton1_Click);
+            this.pencilButton.Click += new System.EventHandler(this.pencilButton_Click);
             // 
             // brushButton
             // 
@@ -206,7 +206,7 @@
             this.brushButton.Name = "brushButton";
             this.brushButton.Size = new System.Drawing.Size(29, 20);
             this.brushButton.Text = "Brush";
-            this.brushButton.Click += new System.EventHandler(this.toolStripButton2_Click);
+            this.brushButton.Click += new System.EventHandler(this.brushButton_Click);
             // 
             // lineButton
             // 
@@ -217,7 +217,7 @@
             this.lineButton.Name = "lineButton";
             this.lineButton.Size = new System.Drawing.Size(29, 20);
             this.lineButton.Text = "Line";
-            this.lineButton.Click += new System.EventHandler(this.toolStripButton3_Click);
+            this.lineButton.Click += new System.EventHandler(this.lineButton_Click);
             // 
             // rectangleButton
             // 
@@ -228,7 +228,7 @@
             this.rectangleButton.Name = "rectangleButton";
             this.rectangleButton.Size = new System.Drawing.Size(29, 20);
             this.rectangleButton.Text = "Rectangle";
-            this.rectangleButton.Click += new System.EventHandler(this.toolStripButton4_Click);
+            this.rectangleButton.Click += new System.EventHandler(this.rectangleButton_Click);
             // 
             // ellipseButton
             // 
@@ -239,7 +239,7 @@
             this.ellipseButton.Name = "ellipseButton";
             this.ellipseButton.Size = new System.Drawing.Size(29, 20);
             this.ellipseButton.Text = "Ellipse";
-            this.ellipseButton.Click += new System.EventHandler(this.toolStripButton5_Click);
+            this.ellipseButton.Click += new System.EventHandler(this.ellipseButton_Click);
             // 
             // eraserButton
             // 
@@ -250,7 +250,7 @@
             this.eraserButton.Name = "eraserButton";
             this.eraserButton.Size = new System.Drawing.Size(29, 20);
             this.eraserButton.Text = "Eraser";
-            this.eraserButton.Click += new System.EventHandler(this.toolStripButton14_Click);
+            this.eraserButton.Click += new System.EventHandler(this.eraserButton_Click);
             // 
             // toolStripLabel1
             // 
@@ -316,7 +316,7 @@
             this.newButtonQuick.Name = "newButtonQuick";
             this.newButtonQuick.Size = new System.Drawing.Size(23, 22);
             this.newButtonQuick.Text = "New";
-            this.newButtonQuick.Click += new System.EventHandler(this.toolStripButton6_Click);
+            this.newButtonQuick.Click += new System.EventHandler(this.newButton_Click);
             // 
             // openButtonQuick
             // 
@@ -326,7 +326,7 @@
             this.openButtonQuick.Name = "openButtonQuick";
             this.openButtonQuick.Size = new System.Drawing.Size(23, 22);
             this.openButtonQuick.Text = "Open";
-            this.openButtonQuick.Click += new System.EventHandler(this.toolStripButton7_Click);
+            this.openButtonQuick.Click += new System.EventHandler(this.openButton_Click);
             // 
             // saveButtonQuick
             // 
@@ -336,7 +336,7 @@
             this.saveButtonQuick.Name = "saveButtonQuick";
             this.saveButtonQuick.Size = new System.Drawing.Size(23, 22);
             this.saveButtonQuick.Text = "Save";
-            this.saveButtonQuick.Click += new System.EventHandler(this.toolStripButton8_Click);
+            this.saveButtonQuick.Click += new System.EventHandler(this.saveButton_Click);
             // 
             // undoButtonQuick
             // 
@@ -348,7 +348,7 @@
             this.undoButtonQuick.Name = "undoButtonQuick";
             this.undoButtonQuick.Size = new System.Drawing.Size(23, 22);
             this.undoButtonQuick.Text = "Undo";
-            this.undoButtonQuick.Click += new System.EventHandler(this.toolStripButton19_Click);
+            this.undoButtonQuick.Click += new System.EventHandler(this.undoButton_Click);
             // 
             // AddPictureBox
             // 
