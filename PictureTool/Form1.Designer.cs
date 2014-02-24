@@ -271,7 +271,7 @@
             this.noFillButton.Name = "noFillButton";
             this.noFillButton.Size = new System.Drawing.Size(29, 20);
             this.noFillButton.Visible = false;
-            this.noFillButton.Click += new System.EventHandler(this.toolStripButton15_Click);
+            this.noFillButton.Click += new System.EventHandler(this.noFillButton_Click);
             // 
             // fillButton
             // 
@@ -282,7 +282,7 @@
             this.fillButton.Name = "fillButton";
             this.fillButton.Size = new System.Drawing.Size(29, 20);
             this.fillButton.Visible = false;
-            this.fillButton.Click += new System.EventHandler(this.toolStripButton16_Click);
+            this.fillButton.Click += new System.EventHandler(this.fillButton_Click);
             // 
             // Sepia
             // 
@@ -382,7 +382,7 @@
             this.colorPickerButton.Name = "colorPickerButton";
             this.colorPickerButton.Size = new System.Drawing.Size(33, 22);
             this.colorPickerButton.Text = "Other colors";
-            this.colorPickerButton.Click += new System.EventHandler(this.toolStripButton17_Click);
+            this.colorPickerButton.Click += new System.EventHandler(this.colorPicker_Click);
             // 
             // toolStripLabel2
             // 
@@ -412,9 +412,9 @@
             this.canvas.SizeMode = System.Windows.Forms.PictureBoxSizeMode.AutoSize;
             this.canvas.TabIndex = 4;
             this.canvas.TabStop = false;
-            this.canvas.MouseDown += new System.Windows.Forms.MouseEventHandler(this.pictureBox1_MouseDown);
-            this.canvas.MouseMove += new System.Windows.Forms.MouseEventHandler(this.pictureBox1_MouseMove);
-            this.canvas.MouseUp += new System.Windows.Forms.MouseEventHandler(this.pictureBox1_MouseUp);
+            this.canvas.MouseDown += new System.Windows.Forms.MouseEventHandler(this.canvas_MouseDown);
+            this.canvas.MouseMove += new System.Windows.Forms.MouseEventHandler(this.canvas_MouseMove);
+            this.canvas.MouseUp += new System.Windows.Forms.MouseEventHandler(this.canvas_MouseUp);
             // 
             // panel
             // 
@@ -452,8 +452,6 @@
             this.MainMenuStrip = this.menu;
             this.Name = "Form1";
             this.Text = "untitled";
-            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.Form1_FormClosing);
-            this.Load += new System.EventHandler(this.Form1_Load);
             this.menu.ResumeLayout(false);
             this.menu.PerformLayout();
             this.toolbar.ResumeLayout(false);
