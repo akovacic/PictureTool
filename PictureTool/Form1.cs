@@ -11,21 +11,23 @@ using System.Drawing.Imaging;
 
 namespace PictureTool
 {
+    enum Tool {Pencil, Brush, Line, Rectangle, Ellipse, Eraser};
+
     public partial class Form1 : Form
     {
-        private bool draw;
+        private bool draw, filled, saved, pictureOpened;
         private Color color = Color.Black;
-        private string tool = "pencil";
-        private int size = 1;
+        private Tool tool;
+        private int size;
         private Point start, current, end;
-        private bool filled;
-        private bool saved = true;
         private Stack<Bitmap> history = new Stack<Bitmap>();
-        private bool otvorenaSlika = false;
 
         public Form1()
         {
             InitializeComponent();
+            saved = true;
+            tool = Tool.Pencil;
+            pictureOpened = false;
         }
 
         private Rectangle rectangle(Point p1, Point p2)
@@ -75,7 +77,7 @@ namespace PictureTool
                 undoToolStripMenuItem.Enabled = false;
                 history.Clear();
                 history.Push(bitmap());
-                otvorenaSlika = true;
+                pictureOpened = true;
             }
         }
 
@@ -121,7 +123,7 @@ namespace PictureTool
             {
                 toolStripButton19.Enabled = false;
                 undoToolStripMenuItem.Enabled = false;
-                if (!otvorenaSlika) newImage();
+                if (!pictureOpened) newImage();
                 else
                 {
                     pictureBox1.Image = (Image)Image.FromFile(this.Text).Clone();
@@ -136,7 +138,7 @@ namespace PictureTool
 
         private void toolStripButton6_Click(object sender, EventArgs e)
         {
-            otvorenaSlika = false;
+            pictureOpened = false;
             if (saved)
             {
                 newImage();
@@ -255,7 +257,7 @@ namespace PictureTool
 
         private void toolStripButton1_Click(object sender, EventArgs e)
         {
-            tool = "pencil";
+            tool = Tool.Pencil;
 
             toolStripButton2.Checked = false;
             toolStripButton3.Checked = false;
@@ -270,7 +272,7 @@ namespace PictureTool
 
         private void toolStripButton2_Click(object sender, EventArgs e)
         {
-            tool = "brush";
+            tool = Tool.Brush;
             size = 10;
 
             toolStripButton1.Checked = false;
@@ -286,7 +288,7 @@ namespace PictureTool
 
         private void toolStripButton3_Click(object sender, EventArgs e)
         {
-            tool = "line";
+            tool = Tool.Line;
             size = 1;
 
             toolStripButton1.Checked = false;
@@ -302,7 +304,7 @@ namespace PictureTool
 
         private void toolStripButton4_Click(object sender, EventArgs e)
         {
-            tool = "rectangle";
+            tool = Tool.Rectangle;
             size = 1;
 
             toolStripButton1.Checked = false;
@@ -318,7 +320,7 @@ namespace PictureTool
 
         private void toolStripButton5_Click(object sender, EventArgs e)
         {
-            tool = "ellipse";
+            tool = Tool.Ellipse;
             size = 1;
 
             toolStripButton1.Checked = false;
@@ -334,7 +336,7 @@ namespace PictureTool
 
         private void toolStripButton14_Click(object sender, EventArgs e)
         {
-            tool = "eraser";
+            tool = Tool.Eraser;
             size = 10;
 
             toolStripButton1.Checked = false;
@@ -358,17 +360,16 @@ namespace PictureTool
                 saved = false;
 
                 Graphics graphics = pictureBox1.CreateGraphics();
-                if (tool == "pencil")
-                {
-                    graphics.FillRectangle(new SolidBrush(color), start.X, start.Y, 1, 1);
-                }
-                else if (tool == "brush")
-                {
-                    graphics.FillEllipse(new SolidBrush(color), start.X - size / 2, start.Y - size / 2, size, size);
-                }
-                else if (tool == "eraser")
-                {
-                    graphics.FillRectangle(new SolidBrush(Color.White), start.X - size / 2, start.Y - size / 2, size, size);
+                switch (tool) {
+                    case Tool.Pencil:
+                        graphics.FillRectangle(new SolidBrush(color), start.X, start.Y, 1, 1);
+                        break;
+                    case Tool.Brush:
+                        graphics.FillEllipse(new SolidBrush(color), start.X - size / 2, start.Y - size / 2, size, size);
+                        break;
+                    case Tool.Eraser:
+                        graphics.FillRectangle(new SolidBrush(Color.White), start.X - size / 2, start.Y - size / 2, size, size);
+                        break;
                 }
             }
         }
@@ -381,54 +382,44 @@ namespace PictureTool
                 end = e.Location;
 
                 Graphics graphics = pictureBox1.CreateGraphics();
-                if (tool == "pencil")
-                {
-                    Pen pen = new Pen(color, 1);
-                    graphics.DrawLine(pen, current, end);
-                }
-                else if (tool == "brush")
-                {
-                    graphics.FillEllipse(new SolidBrush(color), current.X - size / 2, current.Y - size / 2, size, size);
-                }
-                else if (tool == "eraser")
-                {
-                    graphics.FillRectangle(new SolidBrush(Color.White), current.X - size / 2, current.Y - size / 2, size, size);
+                switch (tool) {
+                    case Tool.Pencil:
+                        Pen pen = new Pen(color, 1);
+                        graphics.DrawLine(pen, current, end);
+                        break;
+                    case Tool.Brush:
+                        graphics.FillEllipse(new SolidBrush(color), current.X - size / 2, current.Y - size / 2, size, size);
+                        break;
+                    case Tool.Eraser:
+                        graphics.FillRectangle(new SolidBrush(Color.White), current.X - size / 2, current.Y - size / 2, size, size);
+                        break;
                 }
             }
         }
 
         private void pictureBox1_MouseUp(object sender, MouseEventArgs e)
         {
-            if(draw)
-            {
+            Rectangle r;
+
+            if (draw) {
                 end = e.Location;
 
                 Pen pen = new Pen(color, size);
                 Graphics graphics = pictureBox1.CreateGraphics();
-                if (tool == "line")
-                {
-                    graphics.DrawLine(pen, start, end);
-                    // graphics.FillRectangle(new SolidBrush(color), current.X, current.Y, size, size);
-                }
-                else if (tool == "rectangle")
-                {
-                    Rectangle r = rectangle(start, end);
-                    graphics.DrawRectangle(pen, r);
-
-                    if (filled)
-                    {
-                        graphics.FillRectangle(new SolidBrush(color), r);
-                    }
-                }
-                else if (tool == "ellipse")
-                {
-                    Rectangle r = rectangle(start, end);
-                    graphics.DrawEllipse(pen, r);
-
-                    if (filled)
-                    {
-                        graphics.FillEllipse(new SolidBrush(color), r);
-                    }
+                switch (tool) {
+                    case Tool.Line:
+                        graphics.DrawLine(pen, start, end);
+                        break;
+                    case Tool.Rectangle:
+                        r = rectangle(start, end);
+                        graphics.DrawRectangle(pen, r);
+                        if (filled) graphics.FillRectangle(new SolidBrush(color), r);
+                        break;
+                    case Tool.Ellipse:
+                        r = rectangle(start, end);
+                        graphics.DrawEllipse(pen, r);
+                        if (filled) graphics.FillEllipse(new SolidBrush(color), r);
+                        break;
                 }
 
                 toolStripButton19.Enabled = true;
