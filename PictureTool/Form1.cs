@@ -16,7 +16,7 @@ namespace PictureTool
     public partial class Form1 : Form
     {
         private bool draw, filled, saved, pictureOpened;
-        private Color color = Color.Black;
+        private Color color;
         private Tool tool;
         private int size;
         private Point start, current, end;
@@ -28,62 +28,63 @@ namespace PictureTool
             saved = true;
             tool = Tool.Pencil;
             pictureOpened = false;
+            color = Color.Black;
         }
 
-        private Rectangle rectangle(Point p1, Point p2)
+        private Rectangle PointRectangle(Point p1, Point p2)
         {
-            Rectangle r = new Rectangle();
-            r.X = (p1.X > p2.X ? p2.X : p1.X);
-            r.Y = (p1.Y > p2.Y ? p2.Y : p1.Y);
-            r.Width = Math.Abs(p1.X - p2.X);
-            r.Height = Math.Abs(p1.Y - p2.Y);
+            Rectangle rectangle = new Rectangle();
+            rectangle.X = (p1.X > p2.X ? p2.X : p1.X);
+            rectangle.Y = (p1.Y > p2.Y ? p2.Y : p1.Y);
+            rectangle.Width = Math.Abs(p1.X - p2.X);
+            rectangle.Height = Math.Abs(p1.Y - p2.Y);
 
-            return r;
+            return rectangle;
         }
 
-        private Bitmap bitmap()
+        private Bitmap BitmapFromCanvas()
         { 
-            Bitmap b = new Bitmap(pictureBox1.Width, pictureBox1.Height);
-            Graphics graphics = Graphics.FromImage(b);
-            Rectangle r = pictureBox1.RectangleToScreen(pictureBox1.ClientRectangle);
-            graphics.CopyFromScreen(r.Location, Point.Empty, pictureBox1.Size);
+            Bitmap bitmap = new Bitmap(canvas.Width, canvas.Height);
+            Graphics graphics = Graphics.FromImage(bitmap);
+            Rectangle rectangle = canvas.RectangleToScreen(canvas.ClientRectangle);
+            graphics.CopyFromScreen(rectangle.Location, Point.Empty, canvas.Size);
             graphics.Dispose();
 
-            return b;
+            return bitmap;
         }
 
-        private void newImage()
+        private void NewImage()
         {
-            pictureBox1.Refresh();
-            pictureBox1.Image = null;
+            canvas.Refresh();
+            canvas.Image = null;
             this.Text = "untitled";
             saved = true;
-            toolStripButton19.Enabled = false;
-            undoToolStripMenuItem.Enabled = false;
+            undoButtonQuick.Enabled = false;
+            undoButtonMenu.Enabled = false;
             history.Clear();
-            history.Push(bitmap());
+            history.Push(BitmapFromCanvas());
         }
 
-        private void openImage()
+        private void OpenImage()
         {
             OpenFileDialog openFileDialog = new OpenFileDialog();
             openFileDialog.Filter = "JPG Files (*.jpg)|*.jpg|JPEG Files (*.jpeg)|*.jpeg|PNG Files (*.png)|*.png|GIF Files (*.gif)|*.gif|BMP Files (*.bmp)|*.bmp";
             if (openFileDialog.ShowDialog() == System.Windows.Forms.DialogResult.OK)
             {
-                pictureBox1.Image = (Image)Image.FromFile(openFileDialog.FileName).Clone();
+                canvas.Image = (Image)Image.FromFile(openFileDialog.FileName).Clone();
                 this.Text = openFileDialog.FileName;
                 saved = true;
-                toolStripButton19.Enabled = false;
-                undoToolStripMenuItem.Enabled = false;
+                undoButtonQuick.Enabled = false;
+                undoButtonMenu.Enabled = false;
                 history.Clear();
-                history.Push(bitmap());
+                history.Push(BitmapFromCanvas());
                 pictureOpened = true;
             }
         }
 
-        private void saveImage()
+        private void SaveImage()
         {
-            Bitmap picture = bitmap();
+            Bitmap picture = BitmapFromCanvas();
 
             SaveFileDialog saveFileDialog = new SaveFileDialog();
             saveFileDialog.FileName = this.Text;
@@ -111,29 +112,29 @@ namespace PictureTool
                 saved = true;
             }
 
-            pictureBox1.Image = (Image)picture;
+            canvas.Image = (Image)picture;
         }
 
-        private void undo()
+        private void Undo()
         {
             saved = false;
             history.Pop();
-            if (history.Count != 1) pictureBox1.Image = (Image)history.Peek();
+            if (history.Count != 1) canvas.Image = (Image)history.Peek();
             if (history.Count == 1)
             {
-                toolStripButton19.Enabled = false;
-                undoToolStripMenuItem.Enabled = false;
-                if (!pictureOpened) newImage();
+                undoButtonQuick.Enabled = false;
+                undoButtonMenu.Enabled = false;
+                if (!pictureOpened) NewImage();
                 else
                 {
-                    pictureBox1.Image = (Image)Image.FromFile(this.Text).Clone();
+                    canvas.Image = (Image)Image.FromFile(this.Text).Clone();
                 }
             }
         }
 
         private void Form1_Load(object sender, EventArgs e)
         {
-            newImage();
+            NewImage();
         }
 
         private void toolStripButton6_Click(object sender, EventArgs e)
@@ -141,7 +142,7 @@ namespace PictureTool
             pictureOpened = false;
             if (saved)
             {
-                newImage();
+                NewImage();
             }
 
             else
@@ -149,17 +150,17 @@ namespace PictureTool
                 DialogResult result = MessageBox.Show("Save image?", "Picture tool", MessageBoxButtons.YesNoCancel, MessageBoxIcon.Warning);
                 if (result == DialogResult.Yes)
                 {
-                    saveImage();
+                    SaveImage();
 
                     if (saved)
                     {
-                        newImage();
+                        NewImage();
                     }
                 }
 
                 else if (result == DialogResult.No)
                 {
-                    newImage();
+                    NewImage();
                 }
             }
         }
@@ -168,7 +169,7 @@ namespace PictureTool
         {
             if (saved)
             {
-                openImage();
+                OpenImage();
             }
 
             else
@@ -176,31 +177,31 @@ namespace PictureTool
                 DialogResult result = MessageBox.Show("Save image?", "Picture tool", MessageBoxButtons.YesNoCancel, MessageBoxIcon.Warning);
                 if (result == DialogResult.Yes)
                 {
-                    saveImage();
+                    SaveImage();
 
                     if (saved)
                     {
-                        openImage();
+                        OpenImage();
                     }
                 }
 
                 else if (result == DialogResult.No)
                 {
-                    openImage();
+                    OpenImage();
                 }
             }
         }
 
         private void toolStripButton8_Click(object sender, EventArgs e)
         {
-            saveImage();
+            SaveImage();
         }
 
         private void newToolStripMenuItem_Click(object sender, EventArgs e)
         {
             if (saved)
             {
-                newImage();
+                NewImage();
             }
 
             else
@@ -208,17 +209,17 @@ namespace PictureTool
                 DialogResult result = MessageBox.Show("Save image?", "Picture tool", MessageBoxButtons.YesNoCancel, MessageBoxIcon.Warning);
                 if (result == DialogResult.Yes)
                 {
-                    saveImage();
+                    SaveImage();
 
                     if (saved)
                     {
-                        newImage();
+                        NewImage();
                     }
                 }
 
                 else if (result == DialogResult.No)
                 {
-                    newImage();
+                    NewImage();
                 }
             }
         }
@@ -227,7 +228,7 @@ namespace PictureTool
         {
             if (saved)
             {
-                openImage();
+                OpenImage();
             }
 
             else
@@ -235,39 +236,39 @@ namespace PictureTool
                 DialogResult result = MessageBox.Show("Save image?", "Picture tool", MessageBoxButtons.YesNoCancel, MessageBoxIcon.Warning);
                 if (result == DialogResult.Yes)
                 {
-                    saveImage();
+                    SaveImage();
 
                     if (saved)
                     {
-                        openImage();
+                        OpenImage();
                     }
                 }
 
                 else if (result == DialogResult.No)
                 {
-                    openImage();
+                    OpenImage();
                 }
             }
         }
 
         private void openToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            saveImage();
+            SaveImage();
         }
 
         private void toolStripButton1_Click(object sender, EventArgs e)
         {
             tool = Tool.Pencil;
 
-            toolStripButton2.Checked = false;
-            toolStripButton3.Checked = false;
-            toolStripButton4.Checked = false;
-            toolStripButton5.Checked = false;
-            toolStripButton14.Checked = false;
+            brushButton.Checked = false;
+            lineButton.Checked = false;
+            rectangleButton.Checked = false;
+            ellipseButton.Checked = false;
+            eraserButton.Checked = false;
 
             toolStripLabel1.Visible = false;
-            toolStripButton15.Visible = false;
-            toolStripButton16.Visible = false;
+            noFillButton.Visible = false;
+            fillButton.Visible = false;
         }
 
         private void toolStripButton2_Click(object sender, EventArgs e)
@@ -275,15 +276,15 @@ namespace PictureTool
             tool = Tool.Brush;
             size = 10;
 
-            toolStripButton1.Checked = false;
-            toolStripButton3.Checked = false;
-            toolStripButton4.Checked = false;
-            toolStripButton5.Checked = false;
-            toolStripButton14.Checked = false;
+            pencilButton.Checked = false;
+            lineButton.Checked = false;
+            rectangleButton.Checked = false;
+            ellipseButton.Checked = false;
+            eraserButton.Checked = false;
 
             toolStripLabel1.Visible = false;
-            toolStripButton15.Visible = false;
-            toolStripButton16.Visible = false;
+            noFillButton.Visible = false;
+            fillButton.Visible = false;
         }
 
         private void toolStripButton3_Click(object sender, EventArgs e)
@@ -291,15 +292,15 @@ namespace PictureTool
             tool = Tool.Line;
             size = 1;
 
-            toolStripButton1.Checked = false;
-            toolStripButton2.Checked = false;
-            toolStripButton4.Checked = false;
-            toolStripButton5.Checked = false;
-            toolStripButton14.Checked = false;
+            pencilButton.Checked = false;
+            brushButton.Checked = false;
+            rectangleButton.Checked = false;
+            ellipseButton.Checked = false;
+            eraserButton.Checked = false;
 
             toolStripLabel1.Visible = false;
-            toolStripButton15.Visible = false;
-            toolStripButton16.Visible = false;
+            noFillButton.Visible = false;
+            fillButton.Visible = false;
         }
 
         private void toolStripButton4_Click(object sender, EventArgs e)
@@ -307,15 +308,15 @@ namespace PictureTool
             tool = Tool.Rectangle;
             size = 1;
 
-            toolStripButton1.Checked = false;
-            toolStripButton2.Checked = false;
-            toolStripButton3.Checked = false;
-            toolStripButton5.Checked = false;
-            toolStripButton14.Checked = false;
+            pencilButton.Checked = false;
+            brushButton.Checked = false;
+            lineButton.Checked = false;
+            ellipseButton.Checked = false;
+            eraserButton.Checked = false;
 
             toolStripLabel1.Visible = true;
-            toolStripButton15.Visible = true;
-            toolStripButton16.Visible = true;
+            noFillButton.Visible = true;
+            fillButton.Visible = true;
         }
 
         private void toolStripButton5_Click(object sender, EventArgs e)
@@ -323,15 +324,15 @@ namespace PictureTool
             tool = Tool.Ellipse;
             size = 1;
 
-            toolStripButton1.Checked = false;
-            toolStripButton2.Checked = false;
-            toolStripButton3.Checked = false;
-            toolStripButton4.Checked = false;
-            toolStripButton14.Checked = false;
+            pencilButton.Checked = false;
+            brushButton.Checked = false;
+            lineButton.Checked = false;
+            rectangleButton.Checked = false;
+            eraserButton.Checked = false;
 
             toolStripLabel1.Visible = true;
-            toolStripButton15.Visible = true;
-            toolStripButton16.Visible = true;
+            noFillButton.Visible = true;
+            fillButton.Visible = true;
         }
 
         private void toolStripButton14_Click(object sender, EventArgs e)
@@ -339,15 +340,15 @@ namespace PictureTool
             tool = Tool.Eraser;
             size = 10;
 
-            toolStripButton1.Checked = false;
-            toolStripButton2.Checked = false;
-            toolStripButton3.Checked = false;
-            toolStripButton4.Checked = false;
-            toolStripButton5.Checked = false;
+            pencilButton.Checked = false;
+            brushButton.Checked = false;
+            lineButton.Checked = false;
+            rectangleButton.Checked = false;
+            ellipseButton.Checked = false;
 
             toolStripLabel1.Visible = false;
-            toolStripButton15.Visible = false;
-            toolStripButton16.Visible = false;
+            noFillButton.Visible = false;
+            fillButton.Visible = false;
         }
 
         private void pictureBox1_MouseDown(object sender, MouseEventArgs e)
@@ -359,8 +360,9 @@ namespace PictureTool
                 start = end = e.Location;
                 saved = false;
 
-                Graphics graphics = pictureBox1.CreateGraphics();
-                switch (tool) {
+                Graphics graphics = canvas.CreateGraphics();
+                switch (tool)
+                {
                     case Tool.Pencil:
                         graphics.FillRectangle(new SolidBrush(color), start.X, start.Y, 1, 1);
                         break;
@@ -381,8 +383,9 @@ namespace PictureTool
                 current = end;
                 end = e.Location;
 
-                Graphics graphics = pictureBox1.CreateGraphics();
-                switch (tool) {
+                Graphics graphics = canvas.CreateGraphics();
+                switch (tool)
+                {
                     case Tool.Pencil:
                         Pen pen = new Pen(color, 1);
                         graphics.DrawLine(pen, current, end);
@@ -399,32 +402,34 @@ namespace PictureTool
 
         private void pictureBox1_MouseUp(object sender, MouseEventArgs e)
         {
-            Rectangle r;
+            Rectangle frame;
 
-            if (draw) {
+            if (draw)
+            {
                 end = e.Location;
 
                 Pen pen = new Pen(color, size);
-                Graphics graphics = pictureBox1.CreateGraphics();
-                switch (tool) {
+                Graphics graphics = canvas.CreateGraphics();
+                switch (tool)
+                {
                     case Tool.Line:
                         graphics.DrawLine(pen, start, end);
                         break;
                     case Tool.Rectangle:
-                        r = rectangle(start, end);
-                        graphics.DrawRectangle(pen, r);
-                        if (filled) graphics.FillRectangle(new SolidBrush(color), r);
+                        frame = PointRectangle(start, end);
+                        graphics.DrawRectangle(pen, frame);
+                        if (filled) graphics.FillRectangle(new SolidBrush(color), frame);
                         break;
                     case Tool.Ellipse:
-                        r = rectangle(start, end);
-                        graphics.DrawEllipse(pen, r);
-                        if (filled) graphics.FillEllipse(new SolidBrush(color), r);
+                        frame = PointRectangle(start, end);
+                        graphics.DrawEllipse(pen, frame);
+                        if (filled) graphics.FillEllipse(new SolidBrush(color), frame);
                         break;
                 }
 
-                toolStripButton19.Enabled = true;
-                undoToolStripMenuItem.Enabled = true;
-                Bitmap picture = bitmap();
+                undoButtonQuick.Enabled = true;
+                undoButtonMenu.Enabled = true;
+                Bitmap picture = BitmapFromCanvas();
                 history.Push(picture);
             }
 
@@ -436,75 +441,47 @@ namespace PictureTool
 
         }
 
-        private void toolStripButton9_Click(object sender, EventArgs e)
-        {
-            color = Color.Black;
-            toolStripButton18.BackColor = color;
-        }
-
-        private void toolStripButton10_Click(object sender, EventArgs e)
-        {
-            color = Color.White;
-            toolStripButton18.BackColor = color;
-        }
-
-        private void toolStripButton11_Click(object sender, EventArgs e)
-        {
-            color = Color.Red;
-            toolStripButton18.BackColor = color;
-        }
-
-        private void toolStripButton12_Click(object sender, EventArgs e)
-        {
-            color = Color.Green;
-            toolStripButton18.BackColor = color;
-        }
-
-        private void toolStripButton13_Click(object sender, EventArgs e)
-        {
-            color = Color.Blue;
-            toolStripButton18.BackColor = color;
-        }
-
         private void toolStripButton15_Click(object sender, EventArgs e)
         {
             filled = false;
-            toolStripButton16.Checked = false;
+            fillButton.Checked = false;
         }
 
         private void toolStripButton16_Click(object sender, EventArgs e)
         {
             filled = true;
-            toolStripButton15.Checked = false;
+            noFillButton.Checked = false;
         }
 
         private void toolStripButton17_Click(object sender, EventArgs e)
         {
-            ColorDialog dlg = new ColorDialog();
-            dlg.Color = color;
-            if (dlg.ShowDialog() == DialogResult.OK)
-            {
-                color = dlg.Color;
-                toolStripButton18.BackColor = color;
-            }
+            ColorDialog colorPicker = new ColorDialog();
+            colorPicker.Color = color;
+            if (colorPicker.ShowDialog() == DialogResult.OK) UpdateColor(colorPicker.Color);
+        }
+
+        private void UpdateColor(Color color)
+        {
+            this.color = color;
+            selectedColorButton.BackColor = color;
         }
 
         private void Form1_FormClosing(object sender, FormClosingEventArgs e)
         {
             if (!saved && MessageBox.Show("Save image?", "Picture tool", MessageBoxButtons.YesNo, MessageBoxIcon.Warning) == DialogResult.Yes)
             {
-                saveImage();
+                SaveImage();
             }
         }
 
         private void toolStripButton19_Click(object sender, EventArgs e)
         {
-            undo();
+            Undo();
         }
 
         private void undoToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            undo();
+            Undo();
         }
     }
 }
