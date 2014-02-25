@@ -180,7 +180,7 @@
             this.grayScale});
           this.toolbar.Location = new System.Drawing.Point(0, 24);
           this.toolbar.Name = "toolbar";
-          this.toolbar.Size = new System.Drawing.Size(32, 392);
+          this.toolbar.Size = new System.Drawing.Size(24, 392);
           this.toolbar.TabIndex = 2;
           this.toolbar.Text = "toolStrip1";
           // 
@@ -193,7 +193,7 @@
           this.pencilButton.Image = ((System.Drawing.Image)(resources.GetObject("pencilButton.Image")));
           this.pencilButton.ImageTransparentColor = System.Drawing.Color.Magenta;
           this.pencilButton.Name = "pencilButton";
-          this.pencilButton.Size = new System.Drawing.Size(29, 20);
+          this.pencilButton.Size = new System.Drawing.Size(21, 20);
           this.pencilButton.Text = "Pencil";
           this.pencilButton.Click += new System.EventHandler(this.pencilButton_Click);
           // 
@@ -204,7 +204,7 @@
           this.brushButton.Image = ((System.Drawing.Image)(resources.GetObject("brushButton.Image")));
           this.brushButton.ImageTransparentColor = System.Drawing.Color.Magenta;
           this.brushButton.Name = "brushButton";
-          this.brushButton.Size = new System.Drawing.Size(29, 20);
+          this.brushButton.Size = new System.Drawing.Size(21, 20);
           this.brushButton.Text = "Brush";
           this.brushButton.Click += new System.EventHandler(this.brushButton_Click);
           // 
@@ -215,7 +215,7 @@
           this.lineButton.Image = ((System.Drawing.Image)(resources.GetObject("lineButton.Image")));
           this.lineButton.ImageTransparentColor = System.Drawing.Color.Magenta;
           this.lineButton.Name = "lineButton";
-          this.lineButton.Size = new System.Drawing.Size(29, 20);
+          this.lineButton.Size = new System.Drawing.Size(21, 20);
           this.lineButton.Text = "Line";
           this.lineButton.Click += new System.EventHandler(this.lineButton_Click);
           // 
@@ -226,7 +226,7 @@
           this.rectangleButton.Image = ((System.Drawing.Image)(resources.GetObject("rectangleButton.Image")));
           this.rectangleButton.ImageTransparentColor = System.Drawing.Color.Magenta;
           this.rectangleButton.Name = "rectangleButton";
-          this.rectangleButton.Size = new System.Drawing.Size(29, 20);
+          this.rectangleButton.Size = new System.Drawing.Size(21, 20);
           this.rectangleButton.Text = "Rectangle";
           this.rectangleButton.Click += new System.EventHandler(this.rectangleButton_Click);
           // 
@@ -237,7 +237,7 @@
           this.ellipseButton.Image = ((System.Drawing.Image)(resources.GetObject("ellipseButton.Image")));
           this.ellipseButton.ImageTransparentColor = System.Drawing.Color.Magenta;
           this.ellipseButton.Name = "ellipseButton";
-          this.ellipseButton.Size = new System.Drawing.Size(29, 20);
+          this.ellipseButton.Size = new System.Drawing.Size(21, 20);
           this.ellipseButton.Text = "Ellipse";
           this.ellipseButton.Click += new System.EventHandler(this.ellipseButton_Click);
           // 
@@ -248,7 +248,7 @@
           this.eraserButton.Image = ((System.Drawing.Image)(resources.GetObject("eraserButton.Image")));
           this.eraserButton.ImageTransparentColor = System.Drawing.Color.Magenta;
           this.eraserButton.Name = "eraserButton";
-          this.eraserButton.Size = new System.Drawing.Size(29, 20);
+          this.eraserButton.Size = new System.Drawing.Size(21, 20);
           this.eraserButton.Text = "Eraser";
           this.eraserButton.Click += new System.EventHandler(this.eraserButton_Click);
           // 
@@ -256,7 +256,7 @@
           // 
           this.toolStripLabel1.Margin = new System.Windows.Forms.Padding(0, 20, 0, 2);
           this.toolStripLabel1.Name = "toolStripLabel1";
-          this.toolStripLabel1.Size = new System.Drawing.Size(29, 15);
+          this.toolStripLabel1.Size = new System.Drawing.Size(23, 15);
           this.toolStripLabel1.Text = "Fill:";
           this.toolStripLabel1.Visible = false;
           // 
@@ -269,7 +269,7 @@
           this.noFillButton.Image = ((System.Drawing.Image)(resources.GetObject("noFillButton.Image")));
           this.noFillButton.ImageTransparentColor = System.Drawing.Color.Magenta;
           this.noFillButton.Name = "noFillButton";
-          this.noFillButton.Size = new System.Drawing.Size(29, 20);
+          this.noFillButton.Size = new System.Drawing.Size(21, 20);
           this.noFillButton.Visible = false;
           this.noFillButton.Click += new System.EventHandler(this.noFillButton_Click);
           // 
@@ -280,7 +280,7 @@
           this.fillButton.Image = ((System.Drawing.Image)(resources.GetObject("fillButton.Image")));
           this.fillButton.ImageTransparentColor = System.Drawing.Color.Magenta;
           this.fillButton.Name = "fillButton";
-          this.fillButton.Size = new System.Drawing.Size(29, 20);
+          this.fillButton.Size = new System.Drawing.Size(21, 20);
           this.fillButton.Visible = false;
           this.fillButton.Click += new System.EventHandler(this.fillButton_Click);
           // 
@@ -290,7 +290,7 @@
           this.Sepia.Image = ((System.Drawing.Image)(resources.GetObject("Sepia.Image")));
           this.Sepia.ImageTransparentColor = System.Drawing.Color.Magenta;
           this.Sepia.Name = "Sepia";
-          this.Sepia.Size = new System.Drawing.Size(29, 20);
+          this.Sepia.Size = new System.Drawing.Size(21, 20);
           this.Sepia.Text = "Sepia";
           this.Sepia.Click += new System.EventHandler(this.Sepia_Click);
           // 
@@ -300,7 +300,7 @@
           this.grayScale.Image = ((System.Drawing.Image)(resources.GetObject("grayScale.Image")));
           this.grayScale.ImageTransparentColor = System.Drawing.Color.Magenta;
           this.grayScale.Name = "grayScale";
-          this.grayScale.Size = new System.Drawing.Size(29, 20);
+          this.grayScale.Size = new System.Drawing.Size(21, 20);
           this.grayScale.Text = "grayScale";
           this.grayScale.Click += new System.EventHandler(this.grayScale_Click);
           // 
@@ -312,9 +312,9 @@
             this.saveButtonQuick,
             this.undoButtonQuick,
             this.AddPictureBox});
-          this.quickbar.Location = new System.Drawing.Point(32, 24);
+          this.quickbar.Location = new System.Drawing.Point(24, 24);
           this.quickbar.Name = "quickbar";
-          this.quickbar.Size = new System.Drawing.Size(660, 25);
+          this.quickbar.Size = new System.Drawing.Size(668, 25);
           this.quickbar.TabIndex = 1;
           this.quickbar.Text = "toolStrip2";
           // 
@@ -376,9 +376,9 @@
             this.colorPickerButton,
             this.toolStripLabel2,
             this.selectedColorButton});
-          this.colorbar.Location = new System.Drawing.Point(32, 391);
+          this.colorbar.Location = new System.Drawing.Point(24, 391);
           this.colorbar.Name = "colorbar";
-          this.colorbar.Size = new System.Drawing.Size(660, 25);
+          this.colorbar.Size = new System.Drawing.Size(668, 25);
           this.colorbar.Stretch = true;
           this.colorbar.TabIndex = 3;
           this.colorbar.Text = "toolStrip3";
@@ -451,6 +451,7 @@
           this.MainMenuStrip = this.menu;
           this.Name = "Form1";
           this.Text = "untitled";
+          this.Load += new System.EventHandler(this.Form1_Load);
           this.menu.ResumeLayout(false);
           this.menu.PerformLayout();
           this.toolbar.ResumeLayout(false);
