@@ -1,4 +1,6 @@
-﻿namespace PictureTool
+﻿
+
+namespace PictureTool
 {
     partial class Form1
     {
@@ -79,7 +81,7 @@
             this.imageToolStripMenuItem});
           this.menu.Location = new System.Drawing.Point(0, 0);
           this.menu.Name = "menu";
-          this.menu.Size = new System.Drawing.Size(692, 24);
+          this.menu.Size = new System.Drawing.Size(562, 24);
           this.menu.TabIndex = 0;
           this.menu.Text = "menuStrip1";
           // 
@@ -314,7 +316,7 @@
             this.AddPictureBox});
           this.quickbar.Location = new System.Drawing.Point(24, 24);
           this.quickbar.Name = "quickbar";
-          this.quickbar.Size = new System.Drawing.Size(668, 25);
+          this.quickbar.Size = new System.Drawing.Size(538, 25);
           this.quickbar.TabIndex = 1;
           this.quickbar.Text = "toolStrip2";
           // 
@@ -378,7 +380,7 @@
             this.selectedColorButton});
           this.colorbar.Location = new System.Drawing.Point(24, 391);
           this.colorbar.Name = "colorbar";
-          this.colorbar.Size = new System.Drawing.Size(668, 25);
+          this.colorbar.Size = new System.Drawing.Size(538, 25);
           this.colorbar.Stretch = true;
           this.colorbar.TabIndex = 3;
           this.colorbar.Text = "toolStrip3";
@@ -418,7 +420,7 @@
           this.canvas.Cursor = System.Windows.Forms.Cursors.Cross;
           this.canvas.Location = new System.Drawing.Point(0, 0);
           this.canvas.Name = "canvas";
-          this.canvas.Size = new System.Drawing.Size(653, 333);
+          this.canvas.Size = new System.Drawing.Size(534, 333);
           this.canvas.SizeMode = System.Windows.Forms.PictureBoxSizeMode.AutoSize;
           this.canvas.TabIndex = 4;
           this.canvas.TabStop = false;
@@ -435,14 +437,14 @@
           this.panel.Controls.Add(this.canvas);
           this.panel.Location = new System.Drawing.Point(27, 52);
           this.panel.Name = "panel";
-          this.panel.Size = new System.Drawing.Size(665, 336);
+          this.panel.Size = new System.Drawing.Size(535, 336);
           this.panel.TabIndex = 5;
           // 
           // Form1
           // 
           this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
           this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-          this.ClientSize = new System.Drawing.Size(692, 416);
+          this.ClientSize = new System.Drawing.Size(562, 416);
           this.Controls.Add(this.panel);
           this.Controls.Add(this.colorbar);
           this.Controls.Add(this.quickbar);
