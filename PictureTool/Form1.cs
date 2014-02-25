@@ -13,7 +13,7 @@ namespace PictureTool {
   enum Tool { Pencil, Brush, Line, Rectangle, Ellipse, Eraser };
 
   public partial class Form1 : Form {
-    private bool draw, fill, dirty, pictureOpened;
+    private bool draw, fill, dirty
     private Color color;
     private Tool tool;
     private int size;
@@ -221,7 +221,6 @@ namespace PictureTool {
 
       ClearHistory();
 
-      pictureOpened = false;
       dirty = false;
     }
 
@@ -232,7 +231,6 @@ namespace PictureTool {
         canvas.Image = (Image)Image.FromFile(openFileDialog.FileName).Clone();
         this.Text = openFileDialog.FileName;
         ClearHistory();
-        pictureOpened = true;
       }
     }
 
@@ -267,13 +265,10 @@ namespace PictureTool {
     }
 
     private void Undo() {
-      if (history.Count > 1) history.Pop();
-      if (history.Count > 1) canvas.Image = history.Peek();
-      else {
-        // Workaround za malfunction na zadnjem undou.
-        if (pictureOpened) canvas.Image = (Image)Image.FromFile(this.Text).Clone();
-        else canvas.Image = null;
+      history.Pop();
+      canvas.Image = history.Peek();
 
+      if (history.Count == 1) {
         undoButtonQuick.Enabled = false;
         undoButtonMenu.Enabled = false;
       }
