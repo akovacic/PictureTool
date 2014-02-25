@@ -41,6 +41,10 @@ namespace PictureTool
           this.imageToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
           this.resizeToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
           this.rotateToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+          this.cW90ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+          this.cCW90ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+          this.cW45ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+          this.cCW45ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
           this.toolbar = new System.Windows.Forms.ToolStrip();
           this.pencilButton = new System.Windows.Forms.ToolStripButton();
           this.brushButton = new System.Windows.Forms.ToolStripButton();
@@ -81,7 +85,7 @@ namespace PictureTool
             this.imageToolStripMenuItem});
           this.menu.Location = new System.Drawing.Point(0, 0);
           this.menu.Name = "menu";
-          this.menu.Size = new System.Drawing.Size(562, 24);
+          this.menu.Size = new System.Drawing.Size(661, 24);
           this.menu.TabIndex = 0;
           this.menu.Text = "menuStrip1";
           // 
@@ -161,9 +165,42 @@ namespace PictureTool
           // 
           // rotateToolStripMenuItem
           // 
+          this.rotateToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.cW90ToolStripMenuItem,
+            this.cCW90ToolStripMenuItem,
+            this.cW45ToolStripMenuItem,
+            this.cCW45ToolStripMenuItem});
           this.rotateToolStripMenuItem.Name = "rotateToolStripMenuItem";
           this.rotateToolStripMenuItem.Size = new System.Drawing.Size(108, 22);
           this.rotateToolStripMenuItem.Text = "Rotate";
+          // 
+          // cW90ToolStripMenuItem
+          // 
+          this.cW90ToolStripMenuItem.Name = "cW90ToolStripMenuItem";
+          this.cW90ToolStripMenuItem.Size = new System.Drawing.Size(127, 22);
+          this.cW90ToolStripMenuItem.Text = "CW 90°";
+          this.cW90ToolStripMenuItem.Click += new System.EventHandler(this.cW90ToolStripMenuItem_Click);
+          // 
+          // cCW90ToolStripMenuItem
+          // 
+          this.cCW90ToolStripMenuItem.Name = "cCW90ToolStripMenuItem";
+          this.cCW90ToolStripMenuItem.Size = new System.Drawing.Size(127, 22);
+          this.cCW90ToolStripMenuItem.Text = "CCW 90°";
+          this.cCW90ToolStripMenuItem.Click += new System.EventHandler(this.cCW90ToolStripMenuItem_Click);
+          // 
+          // cW45ToolStripMenuItem
+          // 
+          this.cW45ToolStripMenuItem.Name = "cW45ToolStripMenuItem";
+          this.cW45ToolStripMenuItem.Size = new System.Drawing.Size(127, 22);
+          this.cW45ToolStripMenuItem.Text = "CW 180°";
+          this.cW45ToolStripMenuItem.Click += new System.EventHandler(this.cW180ToolStripMenuItem_Click);
+          // 
+          // cCW45ToolStripMenuItem
+          // 
+          this.cCW45ToolStripMenuItem.Name = "cCW45ToolStripMenuItem";
+          this.cCW45ToolStripMenuItem.Size = new System.Drawing.Size(127, 22);
+          this.cCW45ToolStripMenuItem.Text = "CCW 180°";
+          this.cCW45ToolStripMenuItem.Click += new System.EventHandler(this.cCW180ToolStripMenuItem_Click);
           // 
           // toolbar
           // 
@@ -182,7 +219,7 @@ namespace PictureTool
             this.grayScale});
           this.toolbar.Location = new System.Drawing.Point(0, 24);
           this.toolbar.Name = "toolbar";
-          this.toolbar.Size = new System.Drawing.Size(24, 392);
+          this.toolbar.Size = new System.Drawing.Size(24, 571);
           this.toolbar.TabIndex = 2;
           this.toolbar.Text = "toolStrip1";
           // 
@@ -316,7 +353,7 @@ namespace PictureTool
             this.AddPictureBox});
           this.quickbar.Location = new System.Drawing.Point(24, 24);
           this.quickbar.Name = "quickbar";
-          this.quickbar.Size = new System.Drawing.Size(538, 25);
+          this.quickbar.Size = new System.Drawing.Size(637, 25);
           this.quickbar.TabIndex = 1;
           this.quickbar.Text = "toolStrip2";
           // 
@@ -378,9 +415,9 @@ namespace PictureTool
             this.colorPickerButton,
             this.toolStripLabel2,
             this.selectedColorButton});
-          this.colorbar.Location = new System.Drawing.Point(24, 391);
+          this.colorbar.Location = new System.Drawing.Point(24, 570);
           this.colorbar.Name = "colorbar";
-          this.colorbar.Size = new System.Drawing.Size(538, 25);
+          this.colorbar.Size = new System.Drawing.Size(637, 25);
           this.colorbar.Stretch = true;
           this.colorbar.TabIndex = 3;
           this.colorbar.Text = "toolStrip3";
@@ -437,14 +474,14 @@ namespace PictureTool
           this.panel.Controls.Add(this.canvas);
           this.panel.Location = new System.Drawing.Point(27, 52);
           this.panel.Name = "panel";
-          this.panel.Size = new System.Drawing.Size(535, 336);
+          this.panel.Size = new System.Drawing.Size(634, 515);
           this.panel.TabIndex = 5;
           // 
           // Form1
           // 
           this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
           this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-          this.ClientSize = new System.Drawing.Size(562, 416);
+          this.ClientSize = new System.Drawing.Size(661, 595);
           this.Controls.Add(this.panel);
           this.Controls.Add(this.colorbar);
           this.Controls.Add(this.quickbar);
@@ -506,6 +543,10 @@ namespace PictureTool
         private System.Windows.Forms.ToolStripButton AddPictureBox;
         private System.Windows.Forms.ToolStripButton Sepia;
         private System.Windows.Forms.ToolStripButton grayScale;
+        private System.Windows.Forms.ToolStripMenuItem cW90ToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem cCW90ToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem cW45ToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem cCW45ToolStripMenuItem;
     }
 }
 

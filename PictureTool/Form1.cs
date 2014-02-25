@@ -203,5 +203,25 @@ namespace PictureTool {
         }
       }
     }
+
+    private void cW90ToolStripMenuItem_Click(object sender, EventArgs e) {
+      ApplyRotation(90);
+      Changed();
+    }
+
+    private void cCW90ToolStripMenuItem_Click(object sender, EventArgs e) {
+      ApplyRotation(-90);
+      Changed();
+    }
+
+    private void cW180ToolStripMenuItem_Click(object sender, EventArgs e) {
+      ApplyRotation(180);
+      Changed();
+    }
+
+    private void cCW180ToolStripMenuItem_Click(object sender, EventArgs e) {
+      ApplyRotation(-180);
+      Changed();
+    }
   }
 }

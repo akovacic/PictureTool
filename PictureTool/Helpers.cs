@@ -151,5 +151,23 @@ namespace PictureTool {
       canvas.Width = (int)((double)canvas.Height * aspectRatio);
       return new Bitmap(image, new Size(canvas.Width, canvas.Height));
     }
+
+    private void ApplyRotation(int angle) {
+      Bitmap bmp = new Bitmap(canvas.Image.Width, canvas.Image.Height);
+      Graphics gfx = canvas.CreateGraphics();
+
+      gfx.TranslateTransform((float)bmp.Width / 2, (float)bmp.Height / 2);
+      gfx.RotateTransform(angle);
+      gfx.TranslateTransform(-(float)bmp.Width / 2, -(float)bmp.Height / 2);
+      gfx.InterpolationMode = System.Drawing.Drawing2D.InterpolationMode.HighQualityBicubic;
+      gfx.DrawImage(canvas.Image, new Point(0, 0));
+      gfx.Dispose();
+
+      if (Math.Abs(angle) == 90) {
+        int temp = canvas.Width;
+        canvas.Width = canvas.Height;
+        canvas.Height = temp;
+      }
+    }
   }
 }
