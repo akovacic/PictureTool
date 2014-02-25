@@ -13,7 +13,7 @@ namespace PictureTool {
   enum Tool { Pencil, Brush, Line, Rectangle, Ellipse, Eraser };
 
   public partial class Form1 : Form {
-    private bool draw, fill, dirty
+    private bool draw, fill, dirty;
     private Color color;
     private Tool tool;
     private int size;
