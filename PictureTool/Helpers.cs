@@ -33,7 +33,8 @@ namespace PictureTool {
       OpenFileDialog openFileDialog = new OpenFileDialog();
       openFileDialog.Filter = "JPG Files (*.jpg)|*.jpg|JPEG Files (*.jpeg)|*.jpeg|PNG Files (*.png)|*.png|GIF Files (*.gif)|*.gif|BMP Files (*.bmp)|*.bmp";
       if (openFileDialog.ShowDialog() == System.Windows.Forms.DialogResult.OK) {
-        canvas.Image = ResizeImageToFit((Image)Image.FromFile(openFileDialog.FileName), new Size(canvas.Width, canvas.Height));
+        canvas.SizeMode = PictureBoxSizeMode.AutoSize;
+        canvas.Image = Image.FromFile(openFileDialog.FileName);
         this.Text = openFileDialog.FileName;
         ClearHistory();
       }
@@ -87,7 +88,7 @@ namespace PictureTool {
       }
     }
 
-    private void Changed() {
+    public void Changed() {
       canvas.Image = ImageFromCanvas();
       history.Push(canvas.Image);
       undoButtonQuick.Enabled = true;

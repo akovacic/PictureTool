@@ -52,23 +52,25 @@ namespace PictureTool
           this.rectangleButton = new System.Windows.Forms.ToolStripButton();
           this.ellipseButton = new System.Windows.Forms.ToolStripButton();
           this.eraserButton = new System.Windows.Forms.ToolStripButton();
+          this.grayScale = new System.Windows.Forms.ToolStripButton();
+          this.Sepia = new System.Windows.Forms.ToolStripButton();
           this.toolStripLabel1 = new System.Windows.Forms.ToolStripLabel();
           this.noFillButton = new System.Windows.Forms.ToolStripButton();
           this.fillButton = new System.Windows.Forms.ToolStripButton();
-          this.Sepia = new System.Windows.Forms.ToolStripButton();
-          this.grayScale = new System.Windows.Forms.ToolStripButton();
           this.quickbar = new System.Windows.Forms.ToolStrip();
           this.newButtonQuick = new System.Windows.Forms.ToolStripButton();
           this.openButtonQuick = new System.Windows.Forms.ToolStripButton();
           this.saveButtonQuick = new System.Windows.Forms.ToolStripButton();
           this.undoButtonQuick = new System.Windows.Forms.ToolStripButton();
-          this.AddPictureBox = new System.Windows.Forms.ToolStripButton();
           this.colorbar = new System.Windows.Forms.ToolStrip();
           this.colorPickerButton = new System.Windows.Forms.ToolStripButton();
           this.toolStripLabel2 = new System.Windows.Forms.ToolStripLabel();
           this.selectedColorButton = new System.Windows.Forms.ToolStripButton();
           this.canvas = new System.Windows.Forms.PictureBox();
           this.panel = new System.Windows.Forms.Panel();
+          this.effectsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+          this.grayscaleToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+          this.sepiaToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
           this.menu.SuspendLayout();
           this.toolbar.SuspendLayout();
           this.quickbar.SuspendLayout();
@@ -85,7 +87,7 @@ namespace PictureTool
             this.imageToolStripMenuItem});
           this.menu.Location = new System.Drawing.Point(0, 0);
           this.menu.Name = "menu";
-          this.menu.Size = new System.Drawing.Size(661, 24);
+          this.menu.Size = new System.Drawing.Size(692, 24);
           this.menu.TabIndex = 0;
           this.menu.Text = "menuStrip1";
           // 
@@ -96,7 +98,7 @@ namespace PictureTool
             this.openButtonMenu,
             this.saveButtonMenu});
           this.fileToolStripMenuItem.Name = "fileToolStripMenuItem";
-          this.fileToolStripMenuItem.Size = new System.Drawing.Size(37, 20);
+          this.fileToolStripMenuItem.Size = new System.Drawing.Size(35, 20);
           this.fileToolStripMenuItem.Text = "File";
           // 
           // newButtonMenu
@@ -105,7 +107,7 @@ namespace PictureTool
           this.newButtonMenu.Image = ((System.Drawing.Image)(resources.GetObject("newButtonMenu.Image")));
           this.newButtonMenu.Name = "newButtonMenu";
           this.newButtonMenu.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.N)));
-          this.newButtonMenu.Size = new System.Drawing.Size(146, 22);
+          this.newButtonMenu.Size = new System.Drawing.Size(152, 22);
           this.newButtonMenu.Text = "New";
           this.newButtonMenu.Click += new System.EventHandler(this.newButton_Click);
           // 
@@ -115,7 +117,7 @@ namespace PictureTool
           this.openButtonMenu.Image = ((System.Drawing.Image)(resources.GetObject("openButtonMenu.Image")));
           this.openButtonMenu.Name = "openButtonMenu";
           this.openButtonMenu.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.O)));
-          this.openButtonMenu.Size = new System.Drawing.Size(146, 22);
+          this.openButtonMenu.Size = new System.Drawing.Size(151, 22);
           this.openButtonMenu.Text = "Open";
           this.openButtonMenu.Click += new System.EventHandler(this.openButton_Click);
           // 
@@ -125,7 +127,7 @@ namespace PictureTool
           this.saveButtonMenu.Image = ((System.Drawing.Image)(resources.GetObject("saveButtonMenu.Image")));
           this.saveButtonMenu.Name = "saveButtonMenu";
           this.saveButtonMenu.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.S)));
-          this.saveButtonMenu.Size = new System.Drawing.Size(146, 22);
+          this.saveButtonMenu.Size = new System.Drawing.Size(151, 22);
           this.saveButtonMenu.Text = "Save";
           this.saveButtonMenu.Click += new System.EventHandler(this.saveButton_Click);
           // 
@@ -134,7 +136,7 @@ namespace PictureTool
           this.editToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.undoButtonMenu});
           this.editToolStripMenuItem.Name = "editToolStripMenuItem";
-          this.editToolStripMenuItem.Size = new System.Drawing.Size(39, 20);
+          this.editToolStripMenuItem.Size = new System.Drawing.Size(37, 20);
           this.editToolStripMenuItem.Text = "Edit";
           // 
           // undoButtonMenu
@@ -144,7 +146,7 @@ namespace PictureTool
           this.undoButtonMenu.Image = ((System.Drawing.Image)(resources.GetObject("undoButtonMenu.Image")));
           this.undoButtonMenu.Name = "undoButtonMenu";
           this.undoButtonMenu.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.Z)));
-          this.undoButtonMenu.Size = new System.Drawing.Size(144, 22);
+          this.undoButtonMenu.Size = new System.Drawing.Size(148, 22);
           this.undoButtonMenu.Text = "Undo";
           this.undoButtonMenu.Click += new System.EventHandler(this.undoButton_Click);
           // 
@@ -152,16 +154,18 @@ namespace PictureTool
           // 
           this.imageToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.resizeToolStripMenuItem,
-            this.rotateToolStripMenuItem});
+            this.rotateToolStripMenuItem,
+            this.effectsToolStripMenuItem});
           this.imageToolStripMenuItem.Name = "imageToolStripMenuItem";
-          this.imageToolStripMenuItem.Size = new System.Drawing.Size(52, 20);
+          this.imageToolStripMenuItem.Size = new System.Drawing.Size(49, 20);
           this.imageToolStripMenuItem.Text = "Image";
           // 
           // resizeToolStripMenuItem
           // 
           this.resizeToolStripMenuItem.Name = "resizeToolStripMenuItem";
-          this.resizeToolStripMenuItem.Size = new System.Drawing.Size(108, 22);
+          this.resizeToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
           this.resizeToolStripMenuItem.Text = "Resize";
+          this.resizeToolStripMenuItem.Click += new System.EventHandler(this.resizeToolStripMenuItem_Click);
           // 
           // rotateToolStripMenuItem
           // 
@@ -171,34 +175,34 @@ namespace PictureTool
             this.cW45ToolStripMenuItem,
             this.cCW45ToolStripMenuItem});
           this.rotateToolStripMenuItem.Name = "rotateToolStripMenuItem";
-          this.rotateToolStripMenuItem.Size = new System.Drawing.Size(108, 22);
+          this.rotateToolStripMenuItem.Size = new System.Drawing.Size(118, 22);
           this.rotateToolStripMenuItem.Text = "Rotate";
           // 
           // cW90ToolStripMenuItem
           // 
           this.cW90ToolStripMenuItem.Name = "cW90ToolStripMenuItem";
-          this.cW90ToolStripMenuItem.Size = new System.Drawing.Size(127, 22);
+          this.cW90ToolStripMenuItem.Size = new System.Drawing.Size(135, 22);
           this.cW90ToolStripMenuItem.Text = "CW 90°";
           this.cW90ToolStripMenuItem.Click += new System.EventHandler(this.cW90ToolStripMenuItem_Click);
           // 
           // cCW90ToolStripMenuItem
           // 
           this.cCW90ToolStripMenuItem.Name = "cCW90ToolStripMenuItem";
-          this.cCW90ToolStripMenuItem.Size = new System.Drawing.Size(127, 22);
+          this.cCW90ToolStripMenuItem.Size = new System.Drawing.Size(135, 22);
           this.cCW90ToolStripMenuItem.Text = "CCW 90°";
           this.cCW90ToolStripMenuItem.Click += new System.EventHandler(this.cCW90ToolStripMenuItem_Click);
           // 
           // cW45ToolStripMenuItem
           // 
           this.cW45ToolStripMenuItem.Name = "cW45ToolStripMenuItem";
-          this.cW45ToolStripMenuItem.Size = new System.Drawing.Size(127, 22);
+          this.cW45ToolStripMenuItem.Size = new System.Drawing.Size(135, 22);
           this.cW45ToolStripMenuItem.Text = "CW 180°";
           this.cW45ToolStripMenuItem.Click += new System.EventHandler(this.cW180ToolStripMenuItem_Click);
           // 
           // cCW45ToolStripMenuItem
           // 
           this.cCW45ToolStripMenuItem.Name = "cCW45ToolStripMenuItem";
-          this.cCW45ToolStripMenuItem.Size = new System.Drawing.Size(127, 22);
+          this.cCW45ToolStripMenuItem.Size = new System.Drawing.Size(135, 22);
           this.cCW45ToolStripMenuItem.Text = "CCW 180°";
           this.cCW45ToolStripMenuItem.Click += new System.EventHandler(this.cCW180ToolStripMenuItem_Click);
           // 
@@ -212,14 +216,14 @@ namespace PictureTool
             this.rectangleButton,
             this.ellipseButton,
             this.eraserButton,
+            this.grayScale,
+            this.Sepia,
             this.toolStripLabel1,
             this.noFillButton,
-            this.fillButton,
-            this.Sepia,
-            this.grayScale});
+            this.fillButton});
           this.toolbar.Location = new System.Drawing.Point(0, 24);
           this.toolbar.Name = "toolbar";
-          this.toolbar.Size = new System.Drawing.Size(24, 571);
+          this.toolbar.Size = new System.Drawing.Size(24, 442);
           this.toolbar.TabIndex = 2;
           this.toolbar.Text = "toolStrip1";
           // 
@@ -291,11 +295,31 @@ namespace PictureTool
           this.eraserButton.Text = "Eraser";
           this.eraserButton.Click += new System.EventHandler(this.eraserButton_Click);
           // 
+          // grayScale
+          // 
+          this.grayScale.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+          this.grayScale.Image = ((System.Drawing.Image)(resources.GetObject("grayScale.Image")));
+          this.grayScale.ImageTransparentColor = System.Drawing.Color.Magenta;
+          this.grayScale.Name = "grayScale";
+          this.grayScale.Size = new System.Drawing.Size(21, 20);
+          this.grayScale.Text = "Grayscale";
+          this.grayScale.Click += new System.EventHandler(this.grayScale_Click);
+          // 
+          // Sepia
+          // 
+          this.Sepia.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+          this.Sepia.Image = ((System.Drawing.Image)(resources.GetObject("Sepia.Image")));
+          this.Sepia.ImageTransparentColor = System.Drawing.Color.Magenta;
+          this.Sepia.Name = "Sepia";
+          this.Sepia.Size = new System.Drawing.Size(21, 20);
+          this.Sepia.Text = "Sepia";
+          this.Sepia.Click += new System.EventHandler(this.Sepia_Click);
+          // 
           // toolStripLabel1
           // 
           this.toolStripLabel1.Margin = new System.Windows.Forms.Padding(0, 20, 0, 2);
           this.toolStripLabel1.Name = "toolStripLabel1";
-          this.toolStripLabel1.Size = new System.Drawing.Size(23, 15);
+          this.toolStripLabel1.Size = new System.Drawing.Size(21, 13);
           this.toolStripLabel1.Text = "Fill:";
           this.toolStripLabel1.Visible = false;
           // 
@@ -323,37 +347,16 @@ namespace PictureTool
           this.fillButton.Visible = false;
           this.fillButton.Click += new System.EventHandler(this.fillButton_Click);
           // 
-          // Sepia
-          // 
-          this.Sepia.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-          this.Sepia.Image = ((System.Drawing.Image)(resources.GetObject("Sepia.Image")));
-          this.Sepia.ImageTransparentColor = System.Drawing.Color.Magenta;
-          this.Sepia.Name = "Sepia";
-          this.Sepia.Size = new System.Drawing.Size(21, 20);
-          this.Sepia.Text = "Sepia";
-          this.Sepia.Click += new System.EventHandler(this.Sepia_Click);
-          // 
-          // grayScale
-          // 
-          this.grayScale.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-          this.grayScale.Image = ((System.Drawing.Image)(resources.GetObject("grayScale.Image")));
-          this.grayScale.ImageTransparentColor = System.Drawing.Color.Magenta;
-          this.grayScale.Name = "grayScale";
-          this.grayScale.Size = new System.Drawing.Size(21, 20);
-          this.grayScale.Text = "grayScale";
-          this.grayScale.Click += new System.EventHandler(this.grayScale_Click);
-          // 
           // quickbar
           // 
           this.quickbar.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.newButtonQuick,
             this.openButtonQuick,
             this.saveButtonQuick,
-            this.undoButtonQuick,
-            this.AddPictureBox});
+            this.undoButtonQuick});
           this.quickbar.Location = new System.Drawing.Point(24, 24);
           this.quickbar.Name = "quickbar";
-          this.quickbar.Size = new System.Drawing.Size(637, 25);
+          this.quickbar.Size = new System.Drawing.Size(668, 25);
           this.quickbar.TabIndex = 1;
           this.quickbar.Text = "toolStrip2";
           // 
@@ -399,15 +402,6 @@ namespace PictureTool
           this.undoButtonQuick.Text = "Undo";
           this.undoButtonQuick.Click += new System.EventHandler(this.undoButton_Click);
           // 
-          // AddPictureBox
-          // 
-          this.AddPictureBox.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-          this.AddPictureBox.Image = ((System.Drawing.Image)(resources.GetObject("AddPictureBox.Image")));
-          this.AddPictureBox.ImageTransparentColor = System.Drawing.Color.Magenta;
-          this.AddPictureBox.Name = "AddPictureBox";
-          this.AddPictureBox.Size = new System.Drawing.Size(23, 22);
-          this.AddPictureBox.Text = "DodajPictureBox";
-          // 
           // colorbar
           // 
           this.colorbar.Dock = System.Windows.Forms.DockStyle.Bottom;
@@ -415,9 +409,9 @@ namespace PictureTool
             this.colorPickerButton,
             this.toolStripLabel2,
             this.selectedColorButton});
-          this.colorbar.Location = new System.Drawing.Point(24, 570);
+          this.colorbar.Location = new System.Drawing.Point(24, 441);
           this.colorbar.Name = "colorbar";
-          this.colorbar.Size = new System.Drawing.Size(637, 25);
+          this.colorbar.Size = new System.Drawing.Size(668, 25);
           this.colorbar.Stretch = true;
           this.colorbar.TabIndex = 3;
           this.colorbar.Text = "toolStrip3";
@@ -437,7 +431,7 @@ namespace PictureTool
           // 
           this.toolStripLabel2.Margin = new System.Windows.Forms.Padding(20, 1, 0, 2);
           this.toolStripLabel2.Name = "toolStripLabel2";
-          this.toolStripLabel2.Size = new System.Drawing.Size(84, 22);
+          this.toolStripLabel2.Size = new System.Drawing.Size(78, 22);
           this.toolStripLabel2.Text = "Selected color:";
           // 
           // selectedColorButton
@@ -457,7 +451,7 @@ namespace PictureTool
           this.canvas.Cursor = System.Windows.Forms.Cursors.Cross;
           this.canvas.Location = new System.Drawing.Point(0, 0);
           this.canvas.Name = "canvas";
-          this.canvas.Size = new System.Drawing.Size(534, 333);
+          this.canvas.Size = new System.Drawing.Size(600, 350);
           this.canvas.SizeMode = System.Windows.Forms.PictureBoxSizeMode.AutoSize;
           this.canvas.TabIndex = 4;
           this.canvas.TabStop = false;
@@ -474,14 +468,37 @@ namespace PictureTool
           this.panel.Controls.Add(this.canvas);
           this.panel.Location = new System.Drawing.Point(27, 52);
           this.panel.Name = "panel";
-          this.panel.Size = new System.Drawing.Size(634, 515);
+          this.panel.Size = new System.Drawing.Size(665, 386);
           this.panel.TabIndex = 5;
+          // 
+          // effectsToolStripMenuItem
+          // 
+          this.effectsToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.grayscaleToolStripMenuItem,
+            this.sepiaToolStripMenuItem});
+          this.effectsToolStripMenuItem.Name = "effectsToolStripMenuItem";
+          this.effectsToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+          this.effectsToolStripMenuItem.Text = "Effects";
+          // 
+          // grayscaleToolStripMenuItem
+          // 
+          this.grayscaleToolStripMenuItem.Name = "grayscaleToolStripMenuItem";
+          this.grayscaleToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+          this.grayscaleToolStripMenuItem.Text = "Grayscale";
+          this.grayscaleToolStripMenuItem.Click += new System.EventHandler(this.grayscaleToolStripMenuItem_Click);
+          // 
+          // sepiaToolStripMenuItem
+          // 
+          this.sepiaToolStripMenuItem.Name = "sepiaToolStripMenuItem";
+          this.sepiaToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+          this.sepiaToolStripMenuItem.Text = "Sepia";
+          this.sepiaToolStripMenuItem.Click += new System.EventHandler(this.sepiaToolStripMenuItem_Click);
           // 
           // Form1
           // 
           this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
           this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-          this.ClientSize = new System.Drawing.Size(661, 595);
+          this.ClientSize = new System.Drawing.Size(692, 466);
           this.Controls.Add(this.panel);
           this.Controls.Add(this.colorbar);
           this.Controls.Add(this.quickbar);
@@ -490,6 +507,7 @@ namespace PictureTool
           this.MainMenuStrip = this.menu;
           this.Name = "Form1";
           this.Text = "untitled";
+          this.WindowState = System.Windows.Forms.FormWindowState.Maximized;
           this.Load += new System.EventHandler(this.Form1_Load);
           this.menu.ResumeLayout(false);
           this.menu.PerformLayout();
@@ -540,13 +558,15 @@ namespace PictureTool
         private System.Windows.Forms.ToolStripMenuItem rotateToolStripMenuItem;
         public System.Windows.Forms.ToolStrip colorbar;
         private System.Windows.Forms.ToolStripLabel toolStripLabel1;
-        private System.Windows.Forms.ToolStripButton AddPictureBox;
         private System.Windows.Forms.ToolStripButton Sepia;
         private System.Windows.Forms.ToolStripButton grayScale;
         private System.Windows.Forms.ToolStripMenuItem cW90ToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem cCW90ToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem cW45ToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem cCW45ToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem effectsToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem grayscaleToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem sepiaToolStripMenuItem;
     }
 }
 

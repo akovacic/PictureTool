@@ -141,7 +141,7 @@ namespace PictureTool {
         current = end;
         end = e.Location;
 
-        Pen pen = new Pen(color, size);
+        Pen pen = new Pen(color, 1);
         switch (tool) {
           case Tool.Pencil:
             graphics.DrawLine(pen, current, end);
@@ -222,6 +222,27 @@ namespace PictureTool {
     private void cCW180ToolStripMenuItem_Click(object sender, EventArgs e) {
       ApplyRotation(-180);
       Changed();
+    }
+
+    private void resizeToolStripMenuItem_Click(object sender, EventArgs e) {
+      Resize resizeForm = new Resize();
+      resizeForm.pictureTool = this;
+      resizeForm.Location = new Point(200, 200);
+      resizeForm.ShowDialog();
+    }
+
+    private void grayscaleToolStripMenuItem_Click(object sender, EventArgs e) {
+      if (canvas.Image != null) {
+        ApplyGrayscale();
+        Changed();
+      }
+    }
+
+    private void sepiaToolStripMenuItem_Click(object sender, EventArgs e) {
+      if (canvas.Image != null) {
+        ApplySepia();
+        Changed();
+      }
     }
   }
 }
