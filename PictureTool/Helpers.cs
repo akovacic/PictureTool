@@ -43,9 +43,6 @@ namespace PictureTool {
       DialogResult answer;
       ImageFormat format;
 
-      answer = MessageBox.Show("Save image?", "Picture tool", MessageBoxButtons.YesNoCancel, MessageBoxIcon.Warning);
-      if (answer == DialogResult.No || answer == DialogResult.Cancel) return answer;
-
       Bitmap image = (Bitmap)canvas.Image;
       SaveFileDialog saveFileDialog = new SaveFileDialog();
       saveFileDialog.FileName = this.Text;
@@ -82,7 +79,8 @@ namespace PictureTool {
     private void ResolveDirty(Action action) {
       if (!dirty) action();
       else {
-        DialogResult answer = SaveImage();
+        DialogResult answer = MessageBox.Show("Save image?", "Picture tool", MessageBoxButtons.YesNoCancel, MessageBoxIcon.Warning);
+        if (answer == DialogResult.Yes) answer = SaveImage();
         if (answer != DialogResult.Cancel) action();
       }
     }
