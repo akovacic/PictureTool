@@ -63,6 +63,12 @@
     <Compile Include="Resize.designer.cs">
       <DependentUpon>Resize.cs</DependentUpon>
     </Compile>
+    <Compile Include="Template.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Template.Designer.cs">
+      <DependentUpon>Template.cs</DependentUpon>
+    </Compile>
     <EmbeddedResource Include="Form1.resx">
       <DependentUpon>Form1.cs</DependentUpon>
     </EmbeddedResource>
@@ -77,6 +83,9 @@
     </Compile>
     <EmbeddedResource Include="Resize.resx">
       <DependentUpon>Resize.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Template.resx">
+      <DependentUpon>Template.cs</DependentUpon>
     </EmbeddedResource>
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>

@@ -245,5 +245,33 @@ namespace PictureTool {
         Changed();
       }
     }
+
+    private void toolStripMenuItem3times3_Click(object sender, EventArgs e) {
+      if (canvas.Image != null) {
+        ApplyTemplate(3, 3);
+        // Changed();
+      }
+    }
+
+    private void toolStripMenuItem4times4_Click(object sender, EventArgs e) {
+      if (canvas.Image != null) {
+        ApplyTemplate(4, 4);
+        // Changed();
+      }
+    }
+
+    private void toolStripMenuItem5times5_Click(object sender, EventArgs e) {
+      if (canvas.Image != null) {
+        ApplyTemplate(5, 5);
+        // Changed();
+      }
+    }
+
+    private void customToolStripMenuItem_Click(object sender, EventArgs e) {
+      Template templateForm = new Template();
+      templateForm.pictureTool = this;
+      templateForm.Location = new Point(200, 200);
+      templateForm.ShowDialog();
+    }
   }
 }

@@ -31,20 +31,6 @@ namespace PictureTool
         private void InitializeComponent()
         {
           System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Form1));
-          this.menu = new System.Windows.Forms.MenuStrip();
-          this.fileToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-          this.newButtonMenu = new System.Windows.Forms.ToolStripMenuItem();
-          this.openButtonMenu = new System.Windows.Forms.ToolStripMenuItem();
-          this.saveButtonMenu = new System.Windows.Forms.ToolStripMenuItem();
-          this.editToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-          this.undoButtonMenu = new System.Windows.Forms.ToolStripMenuItem();
-          this.imageToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-          this.resizeToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-          this.rotateToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-          this.cW90ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-          this.cCW90ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-          this.cW45ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-          this.cCW45ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
           this.toolbar = new System.Windows.Forms.ToolStrip();
           this.pencilButton = new System.Windows.Forms.ToolStripButton();
           this.brushButton = new System.Windows.Forms.ToolStripButton();
@@ -68,143 +54,35 @@ namespace PictureTool
           this.selectedColorButton = new System.Windows.Forms.ToolStripButton();
           this.canvas = new System.Windows.Forms.PictureBox();
           this.panel = new System.Windows.Forms.Panel();
+          this.fileToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+          this.newButtonMenu = new System.Windows.Forms.ToolStripMenuItem();
+          this.openButtonMenu = new System.Windows.Forms.ToolStripMenuItem();
+          this.saveButtonMenu = new System.Windows.Forms.ToolStripMenuItem();
+          this.editToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+          this.undoButtonMenu = new System.Windows.Forms.ToolStripMenuItem();
+          this.imageToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+          this.resizeToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+          this.rotateToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+          this.cW90ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+          this.cCW90ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+          this.cW45ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+          this.cCW45ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
           this.effectsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
           this.grayscaleToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
           this.sepiaToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-          this.menu.SuspendLayout();
+          this.templatesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+          this.menu = new System.Windows.Forms.MenuStrip();
+          this.toolStripMenuItem3times3 = new System.Windows.Forms.ToolStripMenuItem();
+          this.toolStripMenuItem4times4 = new System.Windows.Forms.ToolStripMenuItem();
+          this.toolStripMenuItem5times5 = new System.Windows.Forms.ToolStripMenuItem();
+          this.customToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
           this.toolbar.SuspendLayout();
           this.quickbar.SuspendLayout();
           this.colorbar.SuspendLayout();
           ((System.ComponentModel.ISupportInitialize)(this.canvas)).BeginInit();
           this.panel.SuspendLayout();
+          this.menu.SuspendLayout();
           this.SuspendLayout();
-          // 
-          // menu
-          // 
-          this.menu.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.fileToolStripMenuItem,
-            this.editToolStripMenuItem,
-            this.imageToolStripMenuItem});
-          this.menu.Location = new System.Drawing.Point(0, 0);
-          this.menu.Name = "menu";
-          this.menu.Size = new System.Drawing.Size(692, 24);
-          this.menu.TabIndex = 0;
-          this.menu.Text = "menuStrip1";
-          // 
-          // fileToolStripMenuItem
-          // 
-          this.fileToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.newButtonMenu,
-            this.openButtonMenu,
-            this.saveButtonMenu});
-          this.fileToolStripMenuItem.Name = "fileToolStripMenuItem";
-          this.fileToolStripMenuItem.Size = new System.Drawing.Size(35, 20);
-          this.fileToolStripMenuItem.Text = "File";
-          // 
-          // newButtonMenu
-          // 
-          this.newButtonMenu.BackColor = System.Drawing.SystemColors.Control;
-          this.newButtonMenu.Image = ((System.Drawing.Image)(resources.GetObject("newButtonMenu.Image")));
-          this.newButtonMenu.Name = "newButtonMenu";
-          this.newButtonMenu.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.N)));
-          this.newButtonMenu.Size = new System.Drawing.Size(152, 22);
-          this.newButtonMenu.Text = "New";
-          this.newButtonMenu.Click += new System.EventHandler(this.newButton_Click);
-          // 
-          // openButtonMenu
-          // 
-          this.openButtonMenu.BackColor = System.Drawing.SystemColors.Control;
-          this.openButtonMenu.Image = ((System.Drawing.Image)(resources.GetObject("openButtonMenu.Image")));
-          this.openButtonMenu.Name = "openButtonMenu";
-          this.openButtonMenu.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.O)));
-          this.openButtonMenu.Size = new System.Drawing.Size(151, 22);
-          this.openButtonMenu.Text = "Open";
-          this.openButtonMenu.Click += new System.EventHandler(this.openButton_Click);
-          // 
-          // saveButtonMenu
-          // 
-          this.saveButtonMenu.BackColor = System.Drawing.SystemColors.Control;
-          this.saveButtonMenu.Image = ((System.Drawing.Image)(resources.GetObject("saveButtonMenu.Image")));
-          this.saveButtonMenu.Name = "saveButtonMenu";
-          this.saveButtonMenu.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.S)));
-          this.saveButtonMenu.Size = new System.Drawing.Size(151, 22);
-          this.saveButtonMenu.Text = "Save";
-          this.saveButtonMenu.Click += new System.EventHandler(this.saveButton_Click);
-          // 
-          // editToolStripMenuItem
-          // 
-          this.editToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.undoButtonMenu});
-          this.editToolStripMenuItem.Name = "editToolStripMenuItem";
-          this.editToolStripMenuItem.Size = new System.Drawing.Size(37, 20);
-          this.editToolStripMenuItem.Text = "Edit";
-          // 
-          // undoButtonMenu
-          // 
-          this.undoButtonMenu.BackColor = System.Drawing.SystemColors.Control;
-          this.undoButtonMenu.Enabled = false;
-          this.undoButtonMenu.Image = ((System.Drawing.Image)(resources.GetObject("undoButtonMenu.Image")));
-          this.undoButtonMenu.Name = "undoButtonMenu";
-          this.undoButtonMenu.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.Z)));
-          this.undoButtonMenu.Size = new System.Drawing.Size(148, 22);
-          this.undoButtonMenu.Text = "Undo";
-          this.undoButtonMenu.Click += new System.EventHandler(this.undoButton_Click);
-          // 
-          // imageToolStripMenuItem
-          // 
-          this.imageToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.resizeToolStripMenuItem,
-            this.rotateToolStripMenuItem,
-            this.effectsToolStripMenuItem});
-          this.imageToolStripMenuItem.Name = "imageToolStripMenuItem";
-          this.imageToolStripMenuItem.Size = new System.Drawing.Size(49, 20);
-          this.imageToolStripMenuItem.Text = "Image";
-          // 
-          // resizeToolStripMenuItem
-          // 
-          this.resizeToolStripMenuItem.Name = "resizeToolStripMenuItem";
-          this.resizeToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
-          this.resizeToolStripMenuItem.Text = "Resize";
-          this.resizeToolStripMenuItem.Click += new System.EventHandler(this.resizeToolStripMenuItem_Click);
-          // 
-          // rotateToolStripMenuItem
-          // 
-          this.rotateToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.cW90ToolStripMenuItem,
-            this.cCW90ToolStripMenuItem,
-            this.cW45ToolStripMenuItem,
-            this.cCW45ToolStripMenuItem});
-          this.rotateToolStripMenuItem.Name = "rotateToolStripMenuItem";
-          this.rotateToolStripMenuItem.Size = new System.Drawing.Size(118, 22);
-          this.rotateToolStripMenuItem.Text = "Rotate";
-          // 
-          // cW90ToolStripMenuItem
-          // 
-          this.cW90ToolStripMenuItem.Name = "cW90ToolStripMenuItem";
-          this.cW90ToolStripMenuItem.Size = new System.Drawing.Size(135, 22);
-          this.cW90ToolStripMenuItem.Text = "CW 90°";
-          this.cW90ToolStripMenuItem.Click += new System.EventHandler(this.cW90ToolStripMenuItem_Click);
-          // 
-          // cCW90ToolStripMenuItem
-          // 
-          this.cCW90ToolStripMenuItem.Name = "cCW90ToolStripMenuItem";
-          this.cCW90ToolStripMenuItem.Size = new System.Drawing.Size(135, 22);
-          this.cCW90ToolStripMenuItem.Text = "CCW 90°";
-          this.cCW90ToolStripMenuItem.Click += new System.EventHandler(this.cCW90ToolStripMenuItem_Click);
-          // 
-          // cW45ToolStripMenuItem
-          // 
-          this.cW45ToolStripMenuItem.Name = "cW45ToolStripMenuItem";
-          this.cW45ToolStripMenuItem.Size = new System.Drawing.Size(135, 22);
-          this.cW45ToolStripMenuItem.Text = "CW 180°";
-          this.cW45ToolStripMenuItem.Click += new System.EventHandler(this.cW180ToolStripMenuItem_Click);
-          // 
-          // cCW45ToolStripMenuItem
-          // 
-          this.cCW45ToolStripMenuItem.Name = "cCW45ToolStripMenuItem";
-          this.cCW45ToolStripMenuItem.Size = new System.Drawing.Size(135, 22);
-          this.cCW45ToolStripMenuItem.Text = "CCW 180°";
-          this.cCW45ToolStripMenuItem.Click += new System.EventHandler(this.cCW180ToolStripMenuItem_Click);
           // 
           // toolbar
           // 
@@ -471,6 +349,121 @@ namespace PictureTool
           this.panel.Size = new System.Drawing.Size(665, 386);
           this.panel.TabIndex = 5;
           // 
+          // fileToolStripMenuItem
+          // 
+          this.fileToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.newButtonMenu,
+            this.openButtonMenu,
+            this.saveButtonMenu});
+          this.fileToolStripMenuItem.Name = "fileToolStripMenuItem";
+          this.fileToolStripMenuItem.Size = new System.Drawing.Size(35, 20);
+          this.fileToolStripMenuItem.Text = "File";
+          // 
+          // newButtonMenu
+          // 
+          this.newButtonMenu.BackColor = System.Drawing.SystemColors.Control;
+          this.newButtonMenu.Image = ((System.Drawing.Image)(resources.GetObject("newButtonMenu.Image")));
+          this.newButtonMenu.Name = "newButtonMenu";
+          this.newButtonMenu.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.N)));
+          this.newButtonMenu.Size = new System.Drawing.Size(151, 22);
+          this.newButtonMenu.Text = "New";
+          this.newButtonMenu.Click += new System.EventHandler(this.newButton_Click);
+          // 
+          // openButtonMenu
+          // 
+          this.openButtonMenu.BackColor = System.Drawing.SystemColors.Control;
+          this.openButtonMenu.Image = ((System.Drawing.Image)(resources.GetObject("openButtonMenu.Image")));
+          this.openButtonMenu.Name = "openButtonMenu";
+          this.openButtonMenu.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.O)));
+          this.openButtonMenu.Size = new System.Drawing.Size(151, 22);
+          this.openButtonMenu.Text = "Open";
+          this.openButtonMenu.Click += new System.EventHandler(this.openButton_Click);
+          // 
+          // saveButtonMenu
+          // 
+          this.saveButtonMenu.BackColor = System.Drawing.SystemColors.Control;
+          this.saveButtonMenu.Image = ((System.Drawing.Image)(resources.GetObject("saveButtonMenu.Image")));
+          this.saveButtonMenu.Name = "saveButtonMenu";
+          this.saveButtonMenu.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.S)));
+          this.saveButtonMenu.Size = new System.Drawing.Size(151, 22);
+          this.saveButtonMenu.Text = "Save";
+          this.saveButtonMenu.Click += new System.EventHandler(this.saveButton_Click);
+          // 
+          // editToolStripMenuItem
+          // 
+          this.editToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.undoButtonMenu});
+          this.editToolStripMenuItem.Name = "editToolStripMenuItem";
+          this.editToolStripMenuItem.Size = new System.Drawing.Size(37, 20);
+          this.editToolStripMenuItem.Text = "Edit";
+          // 
+          // undoButtonMenu
+          // 
+          this.undoButtonMenu.BackColor = System.Drawing.SystemColors.Control;
+          this.undoButtonMenu.Enabled = false;
+          this.undoButtonMenu.Image = ((System.Drawing.Image)(resources.GetObject("undoButtonMenu.Image")));
+          this.undoButtonMenu.Name = "undoButtonMenu";
+          this.undoButtonMenu.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.Z)));
+          this.undoButtonMenu.Size = new System.Drawing.Size(148, 22);
+          this.undoButtonMenu.Text = "Undo";
+          this.undoButtonMenu.Click += new System.EventHandler(this.undoButton_Click);
+          // 
+          // imageToolStripMenuItem
+          // 
+          this.imageToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.resizeToolStripMenuItem,
+            this.rotateToolStripMenuItem,
+            this.effectsToolStripMenuItem});
+          this.imageToolStripMenuItem.Name = "imageToolStripMenuItem";
+          this.imageToolStripMenuItem.Size = new System.Drawing.Size(49, 20);
+          this.imageToolStripMenuItem.Text = "Image";
+          // 
+          // resizeToolStripMenuItem
+          // 
+          this.resizeToolStripMenuItem.Name = "resizeToolStripMenuItem";
+          this.resizeToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+          this.resizeToolStripMenuItem.Text = "Resize";
+          this.resizeToolStripMenuItem.Click += new System.EventHandler(this.resizeToolStripMenuItem_Click);
+          // 
+          // rotateToolStripMenuItem
+          // 
+          this.rotateToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.cW90ToolStripMenuItem,
+            this.cCW90ToolStripMenuItem,
+            this.cW45ToolStripMenuItem,
+            this.cCW45ToolStripMenuItem});
+          this.rotateToolStripMenuItem.Name = "rotateToolStripMenuItem";
+          this.rotateToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+          this.rotateToolStripMenuItem.Text = "Rotate";
+          // 
+          // cW90ToolStripMenuItem
+          // 
+          this.cW90ToolStripMenuItem.Name = "cW90ToolStripMenuItem";
+          this.cW90ToolStripMenuItem.Size = new System.Drawing.Size(135, 22);
+          this.cW90ToolStripMenuItem.Text = "CW 90°";
+          this.cW90ToolStripMenuItem.Click += new System.EventHandler(this.cW90ToolStripMenuItem_Click);
+          // 
+          // cCW90ToolStripMenuItem
+          // 
+          this.cCW90ToolStripMenuItem.Name = "cCW90ToolStripMenuItem";
+          this.cCW90ToolStripMenuItem.Size = new System.Drawing.Size(135, 22);
+          this.cCW90ToolStripMenuItem.Text = "CCW 90°";
+          this.cCW90ToolStripMenuItem.Click += new System.EventHandler(this.cCW90ToolStripMenuItem_Click);
+          // 
+          // cW45ToolStripMenuItem
+          // 
+          this.cW45ToolStripMenuItem.Name = "cW45ToolStripMenuItem";
+          this.cW45ToolStripMenuItem.Size = new System.Drawing.Size(135, 22);
+          this.cW45ToolStripMenuItem.Text = "CW 180°";
+          this.cW45ToolStripMenuItem.Click += new System.EventHandler(this.cW180ToolStripMenuItem_Click);
+          // 
+          // cCW45ToolStripMenuItem
+          // 
+          this.cCW45ToolStripMenuItem.Name = "cCW45ToolStripMenuItem";
+          this.cCW45ToolStripMenuItem.Size = new System.Drawing.Size(135, 22);
+          this.cCW45ToolStripMenuItem.Text = "CCW 180°";
+          this.cCW45ToolStripMenuItem.Click += new System.EventHandler(this.cCW180ToolStripMenuItem_Click);
+          // 
           // effectsToolStripMenuItem
           // 
           this.effectsToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
@@ -483,16 +476,68 @@ namespace PictureTool
           // grayscaleToolStripMenuItem
           // 
           this.grayscaleToolStripMenuItem.Name = "grayscaleToolStripMenuItem";
-          this.grayscaleToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+          this.grayscaleToolStripMenuItem.Size = new System.Drawing.Size(132, 22);
           this.grayscaleToolStripMenuItem.Text = "Grayscale";
           this.grayscaleToolStripMenuItem.Click += new System.EventHandler(this.grayscaleToolStripMenuItem_Click);
           // 
           // sepiaToolStripMenuItem
           // 
           this.sepiaToolStripMenuItem.Name = "sepiaToolStripMenuItem";
-          this.sepiaToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+          this.sepiaToolStripMenuItem.Size = new System.Drawing.Size(132, 22);
           this.sepiaToolStripMenuItem.Text = "Sepia";
           this.sepiaToolStripMenuItem.Click += new System.EventHandler(this.sepiaToolStripMenuItem_Click);
+          // 
+          // templatesToolStripMenuItem
+          // 
+          this.templatesToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.toolStripMenuItem3times3,
+            this.toolStripMenuItem4times4,
+            this.toolStripMenuItem5times5,
+            this.customToolStripMenuItem});
+          this.templatesToolStripMenuItem.Name = "templatesToolStripMenuItem";
+          this.templatesToolStripMenuItem.Size = new System.Drawing.Size(68, 20);
+          this.templatesToolStripMenuItem.Text = "Templates";
+          // 
+          // menu
+          // 
+          this.menu.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.fileToolStripMenuItem,
+            this.editToolStripMenuItem,
+            this.imageToolStripMenuItem,
+            this.templatesToolStripMenuItem});
+          this.menu.Location = new System.Drawing.Point(0, 0);
+          this.menu.Name = "menu";
+          this.menu.Size = new System.Drawing.Size(692, 24);
+          this.menu.TabIndex = 0;
+          this.menu.Text = "menuStrip1";
+          // 
+          // toolStripMenuItem3times3
+          // 
+          this.toolStripMenuItem3times3.Name = "toolStripMenuItem3times3";
+          this.toolStripMenuItem3times3.Size = new System.Drawing.Size(152, 22);
+          this.toolStripMenuItem3times3.Text = "3×3";
+          this.toolStripMenuItem3times3.Click += new System.EventHandler(this.toolStripMenuItem3times3_Click);
+          // 
+          // toolStripMenuItem4times4
+          // 
+          this.toolStripMenuItem4times4.Name = "toolStripMenuItem4times4";
+          this.toolStripMenuItem4times4.Size = new System.Drawing.Size(152, 22);
+          this.toolStripMenuItem4times4.Text = "4×4";
+          this.toolStripMenuItem4times4.Click += new System.EventHandler(this.toolStripMenuItem4times4_Click);
+          // 
+          // toolStripMenuItem5times5
+          // 
+          this.toolStripMenuItem5times5.Name = "toolStripMenuItem5times5";
+          this.toolStripMenuItem5times5.Size = new System.Drawing.Size(152, 22);
+          this.toolStripMenuItem5times5.Text = "5×5";
+          this.toolStripMenuItem5times5.Click += new System.EventHandler(this.toolStripMenuItem5times5_Click);
+          // 
+          // customToolStripMenuItem
+          // 
+          this.customToolStripMenuItem.Name = "customToolStripMenuItem";
+          this.customToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+          this.customToolStripMenuItem.Text = "Custom";
+          this.customToolStripMenuItem.Click += new System.EventHandler(this.customToolStripMenuItem_Click);
           // 
           // Form1
           // 
@@ -509,8 +554,6 @@ namespace PictureTool
           this.Text = "untitled";
           this.WindowState = System.Windows.Forms.FormWindowState.Maximized;
           this.Load += new System.EventHandler(this.Form1_Load);
-          this.menu.ResumeLayout(false);
-          this.menu.PerformLayout();
           this.toolbar.ResumeLayout(false);
           this.toolbar.PerformLayout();
           this.quickbar.ResumeLayout(false);
@@ -520,6 +563,8 @@ namespace PictureTool
           ((System.ComponentModel.ISupportInitialize)(this.canvas)).EndInit();
           this.panel.ResumeLayout(false);
           this.panel.PerformLayout();
+          this.menu.ResumeLayout(false);
+          this.menu.PerformLayout();
           this.ResumeLayout(false);
           this.PerformLayout();
 
@@ -527,11 +572,6 @@ namespace PictureTool
 
         #endregion
 
-        private System.Windows.Forms.MenuStrip menu;
-        private System.Windows.Forms.ToolStripMenuItem fileToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem newButtonMenu;
-        private System.Windows.Forms.ToolStripMenuItem openButtonMenu;
-        private System.Windows.Forms.ToolStripMenuItem saveButtonMenu;
         private System.Windows.Forms.ToolStrip toolbar;
         private System.Windows.Forms.ToolStripButton pencilButton;
         private System.Windows.Forms.ToolStripButton lineButton;
@@ -551,15 +591,19 @@ namespace PictureTool
         private System.Windows.Forms.ToolStripButton selectedColorButton;
         private System.Windows.Forms.Panel panel;
         private System.Windows.Forms.ToolStripButton undoButtonQuick;
+        public System.Windows.Forms.ToolStrip colorbar;
+        private System.Windows.Forms.ToolStripLabel toolStripLabel1;
+        private System.Windows.Forms.ToolStripButton Sepia;
+        private System.Windows.Forms.ToolStripButton grayScale;
+        private System.Windows.Forms.ToolStripMenuItem fileToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem newButtonMenu;
+        private System.Windows.Forms.ToolStripMenuItem openButtonMenu;
+        private System.Windows.Forms.ToolStripMenuItem saveButtonMenu;
         private System.Windows.Forms.ToolStripMenuItem editToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem undoButtonMenu;
         private System.Windows.Forms.ToolStripMenuItem imageToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem resizeToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem rotateToolStripMenuItem;
-        public System.Windows.Forms.ToolStrip colorbar;
-        private System.Windows.Forms.ToolStripLabel toolStripLabel1;
-        private System.Windows.Forms.ToolStripButton Sepia;
-        private System.Windows.Forms.ToolStripButton grayScale;
         private System.Windows.Forms.ToolStripMenuItem cW90ToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem cCW90ToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem cW45ToolStripMenuItem;
@@ -567,6 +611,12 @@ namespace PictureTool
         private System.Windows.Forms.ToolStripMenuItem effectsToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem grayscaleToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem sepiaToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem templatesToolStripMenuItem;
+        private System.Windows.Forms.MenuStrip menu;
+        private System.Windows.Forms.ToolStripMenuItem toolStripMenuItem3times3;
+        private System.Windows.Forms.ToolStripMenuItem toolStripMenuItem4times4;
+        private System.Windows.Forms.ToolStripMenuItem toolStripMenuItem5times5;
+        private System.Windows.Forms.ToolStripMenuItem customToolStripMenuItem;
     }
 }
 
