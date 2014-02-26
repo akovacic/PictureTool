@@ -196,7 +196,8 @@ namespace PictureTool {
 
     protected override void OnFormClosing(FormClosingEventArgs e) {
       if (dirty) {
-        DialogResult answer = SaveImage();
+        DialogResult answer = MessageBox.Show("Save image?", "Picture tool", MessageBoxButtons.YesNoCancel, MessageBoxIcon.Warning);
+        if (answer == DialogResult.Yes) answer = SaveImage();
         if (answer == DialogResult.Cancel) {
           e.Cancel = true;
           base.OnFormClosing(e);
