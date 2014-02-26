@@ -75,14 +75,6 @@ namespace PictureTool {
       }
     }
 
-    public void Changed() {
-      canvas.Image = ImageFromCanvas();
-      history.Push(canvas.Image);
-      undoButtonQuick.Enabled = true;
-      undoButtonMenu.Enabled = true;
-      dirty = true;
-    }
-
     private void ClearHistory() {
       history.Clear();
       history.Push(graphics.Save());
