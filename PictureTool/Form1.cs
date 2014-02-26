@@ -8,6 +8,7 @@ using System.Text;
 using System.Windows.Forms;
 using System.IO;
 using System.Drawing.Imaging;
+using System.Drawing.Drawing2D;
 
 namespace PictureTool {
   enum Tool { Pencil, Brush, Line, Rectangle, Ellipse, Eraser };
@@ -18,7 +19,8 @@ namespace PictureTool {
     private Tool tool;
     private int size;
     private Point start, current, end;
-    private Stack<Image> history = new Stack<Image>();
+    private Graphics graphics;
+    private Stack<GraphicsState> history = new Stack<GraphicsState>();
 
     public Form1() {
       InitializeComponent();
@@ -115,10 +117,8 @@ namespace PictureTool {
 
     private void canvas_MouseDown(object sender, MouseEventArgs e) {
       if (e.Button == MouseButtons.Left) {
-        draw = true;
         start = end = e.Location;
 
-        Graphics graphics = canvas.CreateGraphics();
         switch (tool) {
           case Tool.Pencil:
             graphics.FillRectangle(new SolidBrush(color), start.X, start.Y, 1, 1);
@@ -130,12 +130,14 @@ namespace PictureTool {
             graphics.FillRectangle(new SolidBrush(Color.White), start.X - size / 2, start.Y - size / 2, size, size);
             break;
         }
+
+        canvas.Invalidate();
+        draw = true;
       }
     }
 
     private void canvas_MouseMove(object sender, MouseEventArgs e) {
       Rectangle frame;
-      Graphics graphics = canvas.CreateGraphics();
 
       if (draw) {
         current = end;
@@ -147,35 +149,56 @@ namespace PictureTool {
             graphics.DrawLine(pen, current, end);
             break;
           case Tool.Brush:
-            graphics = canvas.CreateGraphics();
             graphics.FillEllipse(new SolidBrush(color), current.X - size / 2, current.Y - size / 2, size, size);
             break;
           case Tool.Line:
             canvas.Refresh();
-            graphics.DrawLine(pen, start, end);
+            canvas.CreateGraphics().DrawLine(pen, start, end);
             break;
           case Tool.Rectangle:
             canvas.Refresh();
             frame = PointRectangle(start, end);
-            graphics.DrawRectangle(pen, frame);
-            if (fill) graphics.FillRectangle(new SolidBrush(color), frame);
+            canvas.CreateGraphics().DrawRectangle(pen, frame);
+            if (fill) canvas.CreateGraphics().FillRectangle(new SolidBrush(color), frame);
             break;
           case Tool.Ellipse:
             canvas.Refresh();
             frame = PointRectangle(start, end);
-            graphics.DrawEllipse(pen, frame);
-            if (fill) graphics.FillEllipse(new SolidBrush(color), frame);
+            canvas.CreateGraphics().DrawEllipse(pen, frame);
+            if (fill) canvas.CreateGraphics().FillEllipse(new SolidBrush(color), frame);
             break;
           case Tool.Eraser:
             graphics.FillRectangle(new SolidBrush(Color.White), current.X - size / 2, current.Y - size / 2, size, size);
             break;
         }
+
+        if (tool != Tool.Line && tool != Tool.Rectangle && tool != Tool.Ellipse) canvas.Invalidate();
       }
     }
 
     private void canvas_MouseUp(object sender, MouseEventArgs e) {
+      Rectangle frame;
+
       if (draw) {
+        Pen pen = new Pen(color, size);
+        switch (tool) {
+          case Tool.Line:
+            graphics.DrawLine(pen, start, end);
+            break;
+          case Tool.Rectangle:
+            frame = PointRectangle(start, end);
+            graphics.DrawRectangle(pen, frame);
+            if (fill) graphics.FillRectangle(new SolidBrush(color), frame);
+            break;
+          case Tool.Ellipse:
+            frame = PointRectangle(start, end);
+            graphics.DrawEllipse(pen, frame);
+            if (fill) graphics.FillEllipse(new SolidBrush(color), frame);
+            break;
+        }
+
         draw = false;
+        canvas.Invalidate();
         Changed();
       }
     }
@@ -183,6 +206,7 @@ namespace PictureTool {
     private void Sepia_Click(object sender, EventArgs e) {
       if (canvas.Image != null) {
         ApplySepia();
+        canvas.Invalidate();
         Changed();
       }
     }
@@ -190,6 +214,7 @@ namespace PictureTool {
     private void grayScale_Click(object sender, EventArgs e) {
       if (canvas.Image != null) {
         ApplyGrayscale();
+        canvas.Invalidate();
         Changed();
       }
     }

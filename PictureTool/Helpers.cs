@@ -21,7 +21,8 @@ namespace PictureTool {
 
     private void NewImage() {
       canvas.Refresh();
-      canvas.Image = null;
+      canvas.Image = Image.FromFile("C:\\PictureTool\\blank.jpg");
+      graphics = Graphics.FromImage(canvas.Image);
       this.Text = "untitled";
 
       ClearHistory();
@@ -44,7 +45,6 @@ namespace PictureTool {
       DialogResult answer;
       ImageFormat format;
 
-      Bitmap image = (Bitmap)canvas.Image;
       SaveFileDialog saveFileDialog = new SaveFileDialog();
       saveFileDialog.FileName = this.Text;
       saveFileDialog.Filter = "JPG Files (*.jpg)|*.jpg|JPEG Files (*.jpeg)|*.jpeg|PNG Files (*.png)|*.png|GIF Files (*.gif)|*.gif|BMP Files (*.bmp)|*.bmp";
@@ -58,23 +58,12 @@ namespace PictureTool {
           case ".bmp": format = ImageFormat.Bmp; break;
           default: format = ImageFormat.Jpeg; break;
         }
-        image.Save(saveFileDialog.FileName, format);
+        canvas.Image.Save(saveFileDialog.FileName, format);
         this.Text = saveFileDialog.FileName;
-        canvas.Image = image;
         dirty = false;
       }
 
       return answer;
-    }
-
-    private void Undo() {
-      history.Pop();
-      canvas.Image = history.Peek();
-
-      if (history.Count == 1) {
-        undoButtonQuick.Enabled = false;
-        undoButtonMenu.Enabled = false;
-      }
     }
 
     private void ResolveDirty(Action action) {
@@ -96,19 +85,25 @@ namespace PictureTool {
 
     private void ClearHistory() {
       history.Clear();
-      history.Push(canvas.Image);
+      history.Push(graphics.Save());
       undoButtonQuick.Enabled = false;
       undoButtonMenu.Enabled = false;
     }
 
-    private Image ImageFromCanvas() {
-      Image image = new Bitmap(canvas.Width, canvas.Height);
-      Graphics graphics = Graphics.FromImage(image);
-      Rectangle rectangle = canvas.RectangleToScreen(canvas.ClientRectangle);
-      graphics.CopyFromScreen(rectangle.Location, Point.Empty, canvas.Size);
-      graphics.Dispose();
+    private void Changed() {
+      history.Push(graphics.Save());
+      undoButtonQuick.Enabled = true;
+      undoButtonMenu.Enabled = true;
+      dirty = true;
+    }
 
-      return image;
+    private void Undo() {
+      if (history.Count > 1) graphics.Restore(history.Pop());
+
+      if (history.Count == 1) {
+        undoButtonQuick.Enabled = false;
+        undoButtonMenu.Enabled = false;
+      }
     }
 
     private Rectangle CanvasFrame() {
@@ -116,7 +111,6 @@ namespace PictureTool {
     }
 
     private void ApplySepia() {
-      Graphics graphics = canvas.CreateGraphics();
       ImageAttributes sepiaAttributes = new ImageAttributes();
       sepiaAttributes.SetColorMatrix(new ColorMatrix(
         new float[][] {
@@ -131,7 +125,6 @@ namespace PictureTool {
     }
 
     private void ApplyGrayscale() {
-      Graphics graphics = canvas.CreateGraphics();
       ImageAttributes grayscaleAttributes = new ImageAttributes();
       grayscaleAttributes.SetColorMatrix(new ColorMatrix(
          new float[][]  {
@@ -153,14 +146,13 @@ namespace PictureTool {
 
     private void ApplyRotation(int angle) {
       Bitmap bmp = new Bitmap(canvas.Image.Width, canvas.Image.Height);
-      Graphics gfx = canvas.CreateGraphics();
 
-      gfx.TranslateTransform((float)bmp.Width / 2, (float)bmp.Height / 2);
-      gfx.RotateTransform(angle);
-      gfx.TranslateTransform(-(float)bmp.Width / 2, -(float)bmp.Height / 2);
-      gfx.InterpolationMode = System.Drawing.Drawing2D.InterpolationMode.HighQualityBicubic;
-      gfx.DrawImage(canvas.Image, new Point(0, 0));
-      gfx.Dispose();
+      graphics.TranslateTransform((float)bmp.Width / 2, (float)bmp.Height / 2);
+      graphics.RotateTransform(angle);
+      graphics.TranslateTransform(-(float)bmp.Width / 2, -(float)bmp.Height / 2);
+      graphics.InterpolationMode = System.Drawing.Drawing2D.InterpolationMode.HighQualityBicubic;
+      graphics.DrawImage(canvas.Image, new Point(0, 0));
+      graphics.Dispose();
 
       if (Math.Abs(angle) == 90) {
         int temp = canvas.Width;
