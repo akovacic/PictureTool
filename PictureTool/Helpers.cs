@@ -9,7 +9,7 @@ using System.IO;
 
 namespace PictureTool {
   public partial class Form1 {
-    private Rectangle PointRectangle(Point p1, Point p2) {
+    public Rectangle PointRectangle(Point p1, Point p2) {
       Rectangle rectangle = new Rectangle();
       rectangle.X = (p1.X > p2.X ? p2.X : p1.X);
       rectangle.Y = (p1.Y > p2.Y ? p2.Y : p1.Y);
@@ -19,7 +19,7 @@ namespace PictureTool {
       return rectangle;
     }
 
-    private void NewImage() {
+    public void NewImage() {
       canvas.Refresh();
       ChangeImage(new Bitmap(canvas.Size.Width, canvas.Size.Height));
       this.Text = "untitled";
@@ -29,7 +29,7 @@ namespace PictureTool {
       dirty = false;
     }
 
-    private void OpenImage() {
+    public void OpenImage() {
       OpenFileDialog openFileDialog = new OpenFileDialog();
       openFileDialog.Filter = "JPG Files (*.jpg)|*.jpg|JPEG Files (*.jpeg)|*.jpeg|PNG Files (*.png)|*.png|GIF Files (*.gif)|*.gif|BMP Files (*.bmp)|*.bmp";
       if (openFileDialog.ShowDialog() == System.Windows.Forms.DialogResult.OK) {
@@ -40,7 +40,7 @@ namespace PictureTool {
       }
     }
 
-    private DialogResult SaveImage() {
+    public DialogResult SaveImage() {
       DialogResult answer;
       ImageFormat format;
 
@@ -65,7 +65,7 @@ namespace PictureTool {
       return answer;
     }
 
-    private void ResolveDirty(Action action) {
+    public void ResolveDirty(Action action) {
       if (!dirty) action();
       else {
         DialogResult answer = MessageBox.Show("Save image?", "Picture tool", MessageBoxButtons.YesNoCancel, MessageBoxIcon.Warning);
@@ -74,7 +74,7 @@ namespace PictureTool {
       }
     }
 
-    private void ClearHistory() {
+    public void ClearHistory() {
       history.Clear();
       undoButtonQuick.Enabled = false;
       undoButtonMenu.Enabled = false;
@@ -87,7 +87,7 @@ namespace PictureTool {
       dirty = true;
     }
 
-    private void Undo() {
+    public void Undo() {
       if (history.Count > 1) {
         graphics.Restore(history.Pop());
         canvas.Invalidate();
@@ -99,11 +99,11 @@ namespace PictureTool {
       }
     }
 
-    private Rectangle CanvasFrame() {
+    public Rectangle CanvasFrame() {
       return new Rectangle(canvas.Location.X, canvas.Location.Y, canvas.Width, canvas.Height);
     }
 
-    private void ApplySepia() {
+    public void ApplySepia() {
       ImageAttributes sepiaAttributes = new ImageAttributes();
       sepiaAttributes.SetColorMatrix(new ColorMatrix(
         new float[][] {
@@ -117,7 +117,7 @@ namespace PictureTool {
       graphics.DrawImage(canvas.Image, CanvasFrame(), 0, 0, canvas.Width, canvas.Height, GraphicsUnit.Pixel, sepiaAttributes);
     }
 
-    private void ApplyGrayscale() {
+    public void ApplyGrayscale() {
       ImageAttributes grayscaleAttributes = new ImageAttributes();
       grayscaleAttributes.SetColorMatrix(new ColorMatrix(
          new float[][]  {
@@ -131,13 +131,7 @@ namespace PictureTool {
       graphics.DrawImage(canvas.Image, CanvasFrame(), 0, 0, canvas.Width, canvas.Height, GraphicsUnit.Pixel, grayscaleAttributes);
     }
 
-    private Image ResizeImageToFit(Image image, Size size) {
-      double aspectRatio = (double)image.Width / (double)image.Height;
-      canvas.Width = (int)((double)canvas.Height * aspectRatio);
-      return new Bitmap(image, new Size(canvas.Width, canvas.Height));
-    }
-
-    private void ApplyRotation(int angle) {
+    public void ApplyRotation(int angle) {
       Bitmap bmp = new Bitmap(canvas.Image.Width, canvas.Image.Height);
 
       graphics.TranslateTransform((float)bmp.Width / 2, (float)bmp.Height / 2);

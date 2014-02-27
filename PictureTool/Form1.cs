@@ -11,16 +11,16 @@ using System.Drawing.Imaging;
 using System.Drawing.Drawing2D;
 
 namespace PictureTool {
-  enum Tool { Pencil, Brush, Line, Rectangle, Ellipse, Eraser };
-
   public partial class Form1 : Form {
-    private bool draw, fill, dirty;
-    private Color color;
-    private Tool tool;
-    private int size;
-    private Point start, current, end;
-    private Graphics graphics;
-    private Stack<GraphicsState> history = new Stack<GraphicsState>();
+    public enum Tool { Pencil, Brush, Line, Rectangle, Ellipse, Eraser };
+
+    public bool draw, fill, dirty;
+    public Color color;
+    public Tool tool;
+    public int size;
+    public Point start, current, end;
+    public Graphics graphics;
+    public Stack<GraphicsState> history = new Stack<GraphicsState>();
     public bool useAspectRatio;
 
     public Form1() {
@@ -31,64 +31,64 @@ namespace PictureTool {
       useAspectRatio = true;
     }
 
-    private void Form1_Load(object sender, EventArgs e) {
+    public void Form1_Load(object sender, EventArgs e) {
       NewImage();
     }
 
-    private void newButton_Click(object sender, EventArgs e)  { ResolveDirty(NewImage); }
-    private void openButton_Click(object sender, EventArgs e) { ResolveDirty(OpenImage); }
-    private void saveButton_Click(object sender, EventArgs e) { SaveImage(); }
-    private void undoButton_Click(object sender, EventArgs e) { Undo(); }
+    public void newButton_Click(object sender, EventArgs e)  { ResolveDirty(NewImage); }
+    public void openButton_Click(object sender, EventArgs e) { ResolveDirty(OpenImage); }
+    public void saveButton_Click(object sender, EventArgs e) { SaveImage(); }
+    public void undoButton_Click(object sender, EventArgs e) { Undo(); }
 
-    private void pencilButton_Click(object sender, EventArgs e) {
+    public void pencilButton_Click(object sender, EventArgs e) {
       tool = Tool.Pencil;
       ResetToolSelection();
       pencilButton.Checked = true;
     }
 
-    private void brushButton_Click(object sender, EventArgs e) {
+    public void brushButton_Click(object sender, EventArgs e) {
       tool = Tool.Brush; size = 10;
       ResetToolSelection();
       brushButton.Checked = true;
     }
 
-    private void lineButton_Click(object sender, EventArgs e) {
+    public void lineButton_Click(object sender, EventArgs e) {
       tool = Tool.Line; size = 1;
       ResetToolSelection();
       lineButton.Checked = true;
     }
 
-    private void rectangleButton_Click(object sender, EventArgs e) {
+    public void rectangleButton_Click(object sender, EventArgs e) {
       tool = Tool.Rectangle; size = 1;
       ResetToolSelection();
       rectangleButton.Checked = true;
     }
 
-    private void ellipseButton_Click(object sender, EventArgs e) {
+    public void ellipseButton_Click(object sender, EventArgs e) {
       tool = Tool.Ellipse; size = 1;
       ResetToolSelection();
       ellipseButton.Checked = true;
     }
 
-    private void eraserButton_Click(object sender, EventArgs e) {
+    public void eraserButton_Click(object sender, EventArgs e) {
       tool = Tool.Eraser; size = 10;
       ResetToolSelection();
       eraserButton.Checked = true;
     }
 
-    private void fillButton_Click(object sender, EventArgs e) {
+    public void fillButton_Click(object sender, EventArgs e) {
       fill = true;
       fillButton.Checked = true;
       noFillButton.Checked = false;
     }
 
-    private void noFillButton_Click(object sender, EventArgs e) {
+    public void noFillButton_Click(object sender, EventArgs e) {
       fill = false;
       noFillButton.Checked = true;
       fillButton.Checked = false;
     }
 
-    private void ResetToolSelection() {
+    public void ResetToolSelection() {
       pencilButton.Checked = false;
       brushButton.Checked = false;
       lineButton.Checked = false;
@@ -108,7 +108,7 @@ namespace PictureTool {
       }
     }
 
-    private void colorPicker_Click(object sender, EventArgs e) {
+    public void colorPicker_Click(object sender, EventArgs e) {
       ColorDialog colorPicker = new ColorDialog();
       colorPicker.Color = color;
       if (colorPicker.ShowDialog() == DialogResult.OK) {
@@ -117,7 +117,7 @@ namespace PictureTool {
       }
     }
 
-    private void canvas_MouseDown(object sender, MouseEventArgs e) {
+    public void canvas_MouseDown(object sender, MouseEventArgs e) {
       if (e.Button == MouseButtons.Left) {
         start = end = e.Location;
 
@@ -138,7 +138,7 @@ namespace PictureTool {
       }
     }
 
-    private void canvas_MouseMove(object sender, MouseEventArgs e) {
+    public void canvas_MouseMove(object sender, MouseEventArgs e) {
       Rectangle frame;
 
       if (draw) {
@@ -178,7 +178,7 @@ namespace PictureTool {
       }
     }
 
-    private void canvas_MouseUp(object sender, MouseEventArgs e) {
+    public void canvas_MouseUp(object sender, MouseEventArgs e) {
       Rectangle frame;
 
       if (draw) {
@@ -205,14 +205,14 @@ namespace PictureTool {
       }
     }
 
-    private void Sepia_Click(object sender, EventArgs e) {
+    public void Sepia_Click(object sender, EventArgs e) {
       if (canvas.Image != null) {
         ApplySepia();
         Changed();
       }
     }
 
-    private void grayScale_Click(object sender, EventArgs e) {
+    public void grayScale_Click(object sender, EventArgs e) {
       if (canvas.Image != null) {
         ApplyGrayscale();
         Changed();
@@ -230,69 +230,69 @@ namespace PictureTool {
       }
     }
 
-    private void cW90ToolStripMenuItem_Click(object sender, EventArgs e) {
+    public void cW90ToolStripMenuItem_Click(object sender, EventArgs e) {
       ApplyRotation(90);
       Changed();
     }
 
-    private void cCW90ToolStripMenuItem_Click(object sender, EventArgs e) {
+    public void cCW90ToolStripMenuItem_Click(object sender, EventArgs e) {
       ApplyRotation(-90);
       Changed();
     }
 
-    private void cW180ToolStripMenuItem_Click(object sender, EventArgs e) {
+    public void cW180ToolStripMenuItem_Click(object sender, EventArgs e) {
       ApplyRotation(180);
       Changed();
     }
 
-    private void cCW180ToolStripMenuItem_Click(object sender, EventArgs e) {
+    public void cCW180ToolStripMenuItem_Click(object sender, EventArgs e) {
       ApplyRotation(-180);
       Changed();
     }
 
-    private void resizeToolStripMenuItem_Click(object sender, EventArgs e) {
+    public void resizeToolStripMenuItem_Click(object sender, EventArgs e) {
       Resize resizeForm = new Resize();
       resizeForm.pictureTool = this;
       resizeForm.Location = new Point(200, 200);
       resizeForm.ShowDialog();
     }
 
-    private void grayscaleToolStripMenuItem_Click(object sender, EventArgs e) {
+    public void grayscaleToolStripMenuItem_Click(object sender, EventArgs e) {
       if (canvas.Image != null) {
         ApplyGrayscale();
         Changed();
       }
     }
 
-    private void sepiaToolStripMenuItem_Click(object sender, EventArgs e) {
+    public void sepiaToolStripMenuItem_Click(object sender, EventArgs e) {
       if (canvas.Image != null) {
         ApplySepia();
         Changed();
       }
     }
 
-    private void toolStripMenuItem3times3_Click(object sender, EventArgs e) {
+    public void toolStripMenuItem3times3_Click(object sender, EventArgs e) {
       if (canvas.Image != null) {
         ApplyTemplate(3, 3);
         Changed();
       }
     }
 
-    private void toolStripMenuItem4times4_Click(object sender, EventArgs e) {
+    public void toolStripMenuItem4times4_Click(object sender, EventArgs e) {
       if (canvas.Image != null) {
         ApplyTemplate(4, 4);
         Changed();
       }
     }
 
-    private void toolStripMenuItem5times5_Click(object sender, EventArgs e) {
+    public void toolStripMenuItem5times5_Click(object sender, EventArgs e) {
       if (canvas.Image != null) {
         ApplyTemplate(5, 5);
         Changed();
       }
     }
 
-    private void customToolStripMenuItem_Click(object sender, EventArgs e) {
+    public void customToolStripMenuItem_Click(object sender, EventArgs e) {
       Template templateForm = new Template();
       templateForm.pictureTool = this;
       templateForm.Location = new Point(200, 200);

@@ -7,31 +7,25 @@ using System.Linq;
 using System.Text;
 using System.Windows.Forms;
 
-namespace PictureTool
-{
-    public partial class Resize : Form
-    {
+namespace PictureTool {
+    public partial class Resize : Form {
       public Form1 pictureTool;
  
-        public Resize()
-        {
+        public Resize() {
           InitializeComponent();
         }
 
-        private void Resize_Load(object sender, EventArgs e)
-        {
+        public void Resize_Load(object sender, EventArgs e) {
             WidthNumericUpDown.Value = pictureTool.canvas.Width;
             HeightNumericUpDown.Value = pictureTool.canvas.Height;
             aspectRaitoCheckBox.Checked = pictureTool.useAspectRatio;
         }
 
-        private void CancelButton_Click(object sender, EventArgs e)
-        {
+        public void CancelButton_Click(object sender, EventArgs e) {
             this.Close();
         }
 
-        private void OKButton_Click(object sender, EventArgs e)
-        {
+        public void OKButton_Click(object sender, EventArgs e) {
           int width = (int)WidthNumericUpDown.Value;
           int height = (int)HeightNumericUpDown.Value;
 
@@ -42,7 +36,7 @@ namespace PictureTool
           this.Close();     
         }
 
-        private void WidthNumericUpDown_ValueChanged(object sender, KeyEventArgs e) {
+        public void WidthNumericUpDown_ValueChanged(object sender, KeyEventArgs e) {
           if (pictureTool.useAspectRatio) {
             double aspectRatio = (double)pictureTool.canvas.Height / (double)pictureTool.canvas.Width;
             int width = (int)WidthNumericUpDown.Value;
@@ -50,7 +44,7 @@ namespace PictureTool
           }
         }
 
-        private void HeightNumericUpDown_ValueChanged(object sender, KeyEventArgs e) {
+        public void HeightNumericUpDown_ValueChanged(object sender, KeyEventArgs e) {
           if (pictureTool.useAspectRatio) {
             double aspectRatio = (double)pictureTool.canvas.Width / (double)pictureTool.canvas.Height;
             int height = (int)HeightNumericUpDown.Value;
@@ -58,7 +52,7 @@ namespace PictureTool
           }
         }
 
-        private void WidthNumericUpDown_MouseUp(object sender, MouseEventArgs e) {
+        public void WidthNumericUpDown_MouseUp(object sender, MouseEventArgs e) {
           if (pictureTool.useAspectRatio) {
             double aspectRatio = (double)pictureTool.canvas.Height / (double)pictureTool.canvas.Width;
             int width = (int)WidthNumericUpDown.Value;
@@ -66,7 +60,7 @@ namespace PictureTool
           }
         }
 
-        private void HeightNumericUpDown_MouseUp(object sender, MouseEventArgs e) {
+        public void HeightNumericUpDown_MouseUp(object sender, MouseEventArgs e) {
           if (pictureTool.useAspectRatio) {
             double aspectRatio = (double)pictureTool.canvas.Width / (double)pictureTool.canvas.Height;
             int height = (int)HeightNumericUpDown.Value;
@@ -74,7 +68,7 @@ namespace PictureTool
           }
         }
 
-        private void aspectRaitoCheckBox_CheckedChanged(object sender, EventArgs e) {
+        public void aspectRaitoCheckBox_CheckedChanged(object sender, EventArgs e) {
           if (aspectRaitoCheckBox.Checked) {
             pictureTool.useAspectRatio = true;
           }
