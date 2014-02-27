@@ -179,6 +179,8 @@ namespace PictureTool {
             if (fill) canvas.CreateGraphics().FillEllipse(new SolidBrush(color), frame);
             break;
           case Tool.Eraser:
+            Pen erasingPen = new Pen(Color.White, 10);
+            graphics.DrawLine(erasingPen, current, end);
             graphics.FillRectangle(new SolidBrush(Color.White), current.X - size / 2, current.Y - size / 2, size, size);
             canvas.Invalidate();
             break;

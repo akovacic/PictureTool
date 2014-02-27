@@ -209,6 +209,7 @@ namespace PictureTool {
     public void ChangeImage(Image image) {
       canvas.Image = image;
       canvas.Size = image.Size;
+      canvas.Invalidate();
       graphics = Graphics.FromImage(canvas.Image);
     }
   }
