@@ -20,7 +20,7 @@ namespace PictureTool {
     }
 
     public void NewImage() {
-      ChangeImage(new Bitmap(canvas.Size.Width, canvas.Size.Height));
+      ChangeImage(new Bitmap(canvas.Width, canvas.Height));
       graphics.FillRectangle(new SolidBrush(Color.White), new Rectangle(canvas.Location, canvas.Size));
       this.Text = "untitled";
 
@@ -76,12 +76,14 @@ namespace PictureTool {
 
     public void ClearHistory() {
       history.Clear();
+      history.Push((Bitmap)canvas.Image.Clone());
       undoButtonQuick.Enabled = false;
       undoButtonMenu.Enabled = false;
     }
 
     public void Changed() {
       canvas.Invalidate();
+      history.Push((Bitmap)canvas.Image.Clone());
       undoButtonQuick.Enabled = true;
       undoButtonMenu.Enabled = true;
       dirty = true;
@@ -89,8 +91,8 @@ namespace PictureTool {
 
     public void Undo() {
       if (history.Count > 1) {
-        graphics.Restore(history.Pop());
-        canvas.Invalidate();
+        history.Pop();
+        ChangeImage(history.Peek());
       }
 
       if (history.Count == 1) {

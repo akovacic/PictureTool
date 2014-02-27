@@ -20,7 +20,7 @@ namespace PictureTool {
     public int size;
     public Point start, current, end;
     public Graphics graphics;
-    public Stack<GraphicsState> history = new Stack<GraphicsState>();
+    public Stack<Image> history = new Stack<Image>();
     public bool useAspectRatio;
 
     public Form1() {
