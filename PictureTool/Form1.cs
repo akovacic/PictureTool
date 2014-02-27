@@ -156,9 +156,11 @@ namespace PictureTool {
         switch (tool) {
           case Tool.Pencil:
             graphics.DrawLine(pen, current, end);
+            canvas.Invalidate();
             break;
           case Tool.Brush:
             graphics.FillEllipse(new SolidBrush(color), current.X - size / 2, current.Y - size / 2, size, size);
+            canvas.Invalidate();
             break;
           case Tool.Line:
             canvas.Refresh();
@@ -178,17 +180,16 @@ namespace PictureTool {
             break;
           case Tool.Eraser:
             graphics.FillRectangle(new SolidBrush(Color.White), current.X - size / 2, current.Y - size / 2, size, size);
+            canvas.Invalidate();
             break;
           case Tool.Crop:
+            canvas.Refresh();
             frame = PointRectangle(start, end);
-            float[] dashValues = { 5, 2, 15, 4 };
             pen = new Pen(Color.Black, 2);
-            pen.DashPattern = dashValues;
+            pen.DashPattern = new float[] {5, 2, 15, 4};
             canvas.CreateGraphics().DrawRectangle(pen, frame);
             break;
         }
-
-        if (tool != Tool.Line && tool != Tool.Rectangle && tool != Tool.Ellipse) canvas.Invalidate();
       }
     }
 
@@ -212,8 +213,10 @@ namespace PictureTool {
             if (fill) graphics.FillEllipse(new SolidBrush(color), frame);
             break;
           case Tool.Crop:
-            frame = PointRectangle(start, end);
-            ChangeImage(((Bitmap)canvas.Image).Clone(frame, ((Bitmap)canvas.Image).PixelFormat));
+            if (start != end) {
+              frame = PointRectangle(start, end);
+              ChangeImage(((Bitmap)canvas.Image).Clone(frame, ((Bitmap)canvas.Image).PixelFormat));
+            }
             break;
         }
 
