@@ -20,8 +20,8 @@ namespace PictureTool {
     }
 
     public void NewImage() {
-      canvas.Refresh();
       ChangeImage(new Bitmap(canvas.Size.Width, canvas.Size.Height));
+      graphics.FillRectangle(new SolidBrush(Color.White), new Rectangle(canvas.Location, canvas.Size));
       this.Text = "untitled";
 
       ClearHistory();
