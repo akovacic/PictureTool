@@ -208,7 +208,6 @@ namespace PictureTool {
     private void Sepia_Click(object sender, EventArgs e) {
       if (canvas.Image != null) {
         ApplySepia();
-        canvas.Invalidate();
         Changed();
       }
     }
@@ -216,7 +215,6 @@ namespace PictureTool {
     private void grayScale_Click(object sender, EventArgs e) {
       if (canvas.Image != null) {
         ApplyGrayscale();
-        canvas.Invalidate();
         Changed();
       }
     }

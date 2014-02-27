@@ -21,8 +21,7 @@ namespace PictureTool {
 
     private void NewImage() {
       canvas.Refresh();
-      canvas.Image = new Bitmap(canvas.Size.Width, canvas.Size.Height);
-      graphics = Graphics.FromImage(canvas.Image);
+      ChangeImage(new Bitmap(canvas.Size.Width, canvas.Size.Height));
       this.Text = "untitled";
 
       ClearHistory();
@@ -35,7 +34,7 @@ namespace PictureTool {
       openFileDialog.Filter = "JPG Files (*.jpg)|*.jpg|JPEG Files (*.jpeg)|*.jpeg|PNG Files (*.png)|*.png|GIF Files (*.gif)|*.gif|BMP Files (*.bmp)|*.bmp";
       if (openFileDialog.ShowDialog() == System.Windows.Forms.DialogResult.OK) {
         canvas.SizeMode = PictureBoxSizeMode.AutoSize;
-        canvas.Image = Image.FromFile(openFileDialog.FileName);
+        ChangeImage(Image.FromFile(openFileDialog.FileName));
         this.Text = openFileDialog.FileName;
         ClearHistory();
       }
@@ -77,13 +76,12 @@ namespace PictureTool {
 
     private void ClearHistory() {
       history.Clear();
-      history.Push(graphics.Save());
       undoButtonQuick.Enabled = false;
       undoButtonMenu.Enabled = false;
     }
 
     public void Changed() {
-      history.Push(graphics.Save());
+      canvas.Invalidate();
       undoButtonQuick.Enabled = true;
       undoButtonMenu.Enabled = true;
       dirty = true;
@@ -163,9 +161,6 @@ namespace PictureTool {
       canvas.SizeMode = PictureBoxSizeMode.Normal;
       canvas.Size = new Size(columns * width, rows * height);
 
-      Bitmap newImage = new Bitmap(canvas.Size.Width, canvas.Size.Height);
-      Graphics graphics = Graphics.FromImage(newImage);
-
       int startX = 0, startY = 0;
 
       for (int i = 0; i < rows; ++i) {
@@ -176,8 +171,11 @@ namespace PictureTool {
         startX = 0;
         startY += height;
       }
+    }
 
-      canvas.Image = newImage;
+    public void ChangeImage(Image image) {
+      canvas.Image = image;
+      graphics = Graphics.FromImage(canvas.Image);
     }
   }
 }
