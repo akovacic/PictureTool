@@ -33,7 +33,7 @@ namespace PictureTool {
           Image newImage = pictureTool.canvas.Image;
           pictureTool.canvas.Size = new Size(width, height);
           pictureTool.ChangeImage(new Bitmap(newImage, pictureTool.canvas.Size));
-          this.Close();     
+          this.Close();
         }
 
         public void WidthChanged(object sender, EventArgs e) {

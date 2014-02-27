@@ -267,6 +267,7 @@ namespace PictureTool {
       resizeForm.pictureTool = this;
       resizeForm.Location = new Point(200, 200);
       resizeForm.ShowDialog();
+      Changed();
     }
 
     public void toolStripMenuItem3times3_Click(object sender, EventArgs e) {

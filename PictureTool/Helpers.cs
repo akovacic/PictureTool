@@ -76,14 +76,14 @@ namespace PictureTool {
 
     public void ClearHistory() {
       history.Clear();
-      history.Push((Bitmap)canvas.Image.Clone());
+      history.Push(new Bitmap(canvas.Image));
       undoButtonQuick.Enabled = false;
       undoButtonMenu.Enabled = false;
     }
 
     public void Changed() {
       canvas.Invalidate();
-      history.Push((Bitmap)canvas.Image.Clone());
+      history.Push(new Bitmap(canvas.Image));
       undoButtonQuick.Enabled = true;
       undoButtonMenu.Enabled = true;
       dirty = true;
@@ -204,6 +204,7 @@ namespace PictureTool {
 
     public void ChangeImage(Image image) {
       canvas.Image = image;
+      canvas.Size = image.Size;
       graphics = Graphics.FromImage(canvas.Image);
     }
   }
