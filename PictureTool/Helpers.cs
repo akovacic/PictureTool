@@ -133,21 +133,54 @@ namespace PictureTool {
       graphics.DrawImage(canvas.Image, CanvasFrame(), 0, 0, canvas.Width, canvas.Height, GraphicsUnit.Pixel, grayscaleAttributes);
     }
 
-    public void ApplyRotation(int angle) {
-      Bitmap bmp = new Bitmap(canvas.Image.Width, canvas.Image.Height);
+    public void ApplyRotation(float angle) {
+      Color bkColor = Color.White;
+      angle = angle % 360;
+      if (angle > 180)
+        angle -= 360;
 
-      graphics.TranslateTransform((float)bmp.Width / 2, (float)bmp.Height / 2);
-      graphics.RotateTransform(angle);
-      graphics.TranslateTransform(-(float)bmp.Width / 2, -(float)bmp.Height / 2);
-      graphics.InterpolationMode = System.Drawing.Drawing2D.InterpolationMode.HighQualityBicubic;
-      graphics.DrawImage(canvas.Image, new Point(0, 0));
-      graphics.Dispose();
-
-      if (Math.Abs(angle) == 90) {
-        int temp = canvas.Width;
-        canvas.Width = canvas.Height;
-        canvas.Height = temp;
+      System.Drawing.Imaging.PixelFormat pf = default(System.Drawing.Imaging.PixelFormat);
+      if (bkColor == Color.Transparent) {
+        pf = System.Drawing.Imaging.PixelFormat.Format32bppArgb;
       }
+      else {
+        pf = canvas.Image.PixelFormat;
+      }
+
+      float sin = (float)Math.Abs(Math.Sin(angle * Math.PI / 180.0)); // this function takes radians
+      float cos = (float)Math.Abs(Math.Cos(angle * Math.PI / 180.0)); // this one too
+      float newImgWidth = sin * canvas.Image.Height + cos * canvas.Image.Width;
+      float newImgHeight = sin * canvas.Image.Width + cos * canvas.Image.Height;
+      float originX = 0f;
+      float originY = 0f;
+
+      if (angle > 0) {
+        if (angle <= 90)
+          originX = sin * canvas.Image.Height;
+        else {
+          originX = newImgWidth;
+          originY = newImgHeight - sin * canvas.Image.Width;
+        }
+      }
+      else {
+        if (angle >= -90)
+          originY = sin * canvas.Image.Width;
+        else {
+          originX = newImgWidth - sin * canvas.Image.Height;
+          originY = newImgHeight;
+        }
+      }
+
+      Bitmap newImg = new Bitmap((int)newImgWidth, (int)newImgHeight, pf);
+      Graphics g = Graphics.FromImage(newImg);
+      g.Clear(bkColor);
+      g.TranslateTransform(originX, originY); // offset the origin to our calculated values
+      g.RotateTransform(angle); // set up rotate
+      g.InterpolationMode = System.Drawing.Drawing2D.InterpolationMode.HighQualityBilinear;
+      g.DrawImageUnscaled(canvas.Image, 0, 0); // draw the image at 0, 0
+      g.Dispose();
+
+      ChangeImage(newImg);
     }
 
     public void ApplyTemplate(int rows, int columns) {
