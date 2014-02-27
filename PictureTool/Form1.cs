@@ -251,8 +251,8 @@ namespace PictureTool {
       Changed();
     }
 
-    public void cCW90ToolStripMenuItem_Click(object sender, EventArgs e) {
-      ApplyRotation(-90);
+    public void cW270ToolStripMenuItem_Click(object sender, EventArgs e) {
+      ApplyRotation(270);
       Changed();
     }
 
@@ -261,10 +261,6 @@ namespace PictureTool {
       Changed();
     }
 
-    public void cCW180ToolStripMenuItem_Click(object sender, EventArgs e) {
-      ApplyRotation(-180);
-      Changed();
-    }
 
     public void resizeToolStripMenuItem_Click(object sender, EventArgs e) {
       Resize resizeForm = new Resize();
