@@ -292,6 +292,31 @@ namespace PictureTool {
       templateForm.ShowDialog();
     }
 
+    private void blackToolStripButton_Click(object sender, EventArgs e) {
+      color = Color.Black;
+      selectedColorButton.BackColor = Color.Black;
+    }
+
+    private void whiteToolStripButton_Click(object sender, EventArgs e) {
+      color = Color.White;
+      selectedColorButton.BackColor = Color.White;
+    }
+
+    private void redToolStripButton_Click(object sender, EventArgs e) {
+      color = Color.Red;
+      selectedColorButton.BackColor = Color.Red;
+    }
+
+    private void greenToolStripButton_Click(object sender, EventArgs e) {
+      color = Color.Green;
+      selectedColorButton.BackColor = Color.Green;
+    }
+
+    private void blueToolStripButton_Click(object sender, EventArgs e) {
+      color = Color.Blue;
+      selectedColorButton.BackColor = Color.Blue;
+    }
+
    
   }
 }
