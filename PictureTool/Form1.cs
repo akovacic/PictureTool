@@ -153,31 +153,31 @@ namespace PictureTool {
         end = e.Location;
 
         Pen pen = new Pen(color, 1);
-        Graphics canvasGraphics = canvas.CreateGraphics();
-        canvasGraphics.SmoothingMode = SmoothingMode.AntiAlias;
         switch (tool) {
           case Tool.Pencil:
             graphics.DrawLine(pen, current, end);
             canvas.Invalidate();
             break;
           case Tool.Brush:
+            Pen brush = new Pen(color, 10);
+            graphics.DrawLine(brush, current, end);
             graphics.FillEllipse(new SolidBrush(color), current.X - size / 2, current.Y - size / 2, size, size);
             canvas.Invalidate();
             break;
           case Tool.Line:
             canvas.Refresh();
-            canvasGraphics.DrawLine(pen, start, end);
+            canvas.CreateGraphics().DrawLine(pen, start, end);
             break;
           case Tool.Rectangle:
             canvas.Refresh();
             frame = PointRectangle(start, end);
-            canvasGraphics.DrawRectangle(pen, frame);
+            canvas.CreateGraphics().DrawRectangle(pen, frame);
             if (fill) canvas.CreateGraphics().FillRectangle(new SolidBrush(color), frame);
             break;
           case Tool.Ellipse:
             canvas.Refresh();
             frame = PointRectangle(start, end);
-            canvasGraphics.DrawEllipse(pen, frame);
+            canvas.CreateGraphics().DrawEllipse(pen, frame);
             if (fill) canvas.CreateGraphics().FillEllipse(new SolidBrush(color), frame);
             break;
           case Tool.Eraser:
@@ -191,7 +191,7 @@ namespace PictureTool {
             frame = PointRectangle(start, end);
             pen = new Pen(Color.Black, 2);
             pen.DashPattern = new float[] {5, 2, 15, 4};
-            canvasGraphics.DrawRectangle(pen, frame);
+            canvas.CreateGraphics().DrawRectangle(pen, frame);
             break;
         }
       }
