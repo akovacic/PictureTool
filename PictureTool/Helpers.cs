@@ -189,17 +189,21 @@ namespace PictureTool {
       Image miniImage = new Bitmap(canvas.Image, new Size(width, height));
       canvas.SizeMode = PictureBoxSizeMode.Normal;
       canvas.Size = new Size(columns * width, rows * height);
+      Bitmap newImage = new Bitmap(canvas.Width, canvas.Height);
+      Graphics g = Graphics.FromImage(newImage);
 
       int startX = 0, startY = 0;
 
       for (int i = 0; i < rows; ++i) {
         for (int j = 0; j < columns; ++j) {
-          graphics.DrawImage(miniImage, new Point(startX, startY));
+          g.DrawImage(miniImage, new Point(startX, startY));
           startX += width;
         }
         startX = 0;
         startY += height;
       }
+
+      ChangeImage(new Bitmap(newImage, canvas.Size));
     }
 
     public void ChangeImage(Image image) {
