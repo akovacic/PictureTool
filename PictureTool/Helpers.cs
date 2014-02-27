@@ -6,6 +6,7 @@ using System.Drawing.Imaging;
 using System.Drawing;
 using System.Windows.Forms;
 using System.IO;
+using System.Drawing.Drawing2D;
 
 namespace PictureTool {
   public partial class Form1 {
@@ -211,6 +212,7 @@ namespace PictureTool {
       canvas.Size = image.Size;
       canvas.Invalidate();
       graphics = Graphics.FromImage(canvas.Image);
+      graphics.SmoothingMode = SmoothingMode.AntiAlias;
     }
   }
 }
