@@ -90,7 +90,10 @@ namespace PictureTool {
     }
 
     private void Undo() {
-      if (history.Count > 1) graphics.Restore(history.Pop());
+      if (history.Count > 1) {
+        graphics.Restore(history.Pop());
+        canvas.Invalidate();
+      }
 
       if (history.Count == 1) {
         undoButtonQuick.Enabled = false;
