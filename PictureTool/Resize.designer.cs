@@ -36,7 +36,7 @@
           this.label4 = new System.Windows.Forms.Label();
           this.WidthNumericUpDown = new System.Windows.Forms.NumericUpDown();
           this.HeightNumericUpDown = new System.Windows.Forms.NumericUpDown();
-          this.aspectRaitoCheckBox = new System.Windows.Forms.CheckBox();
+          this.aspectRatioCheckBox = new System.Windows.Forms.CheckBox();
           ((System.ComponentModel.ISupportInitialize)(this.WidthNumericUpDown)).BeginInit();
           ((System.ComponentModel.ISupportInitialize)(this.HeightNumericUpDown)).BeginInit();
           this.SuspendLayout();
@@ -113,8 +113,8 @@
             0,
             0,
             0});
-          this.WidthNumericUpDown.KeyUp += new System.Windows.Forms.KeyEventHandler(this.WidthNumericUpDown_ValueChanged);
-          this.WidthNumericUpDown.MouseUp += new System.Windows.Forms.MouseEventHandler(this.WidthNumericUpDown_MouseUp);
+          this.WidthNumericUpDown.KeyUp += new System.Windows.Forms.KeyEventHandler(this.WidthChanged);
+          this.WidthNumericUpDown.MouseUp += new System.Windows.Forms.MouseEventHandler(this.WidthChanged);
           // 
           // HeightNumericUpDown
           // 
@@ -132,21 +132,21 @@
             0,
             0,
             0});
-          this.HeightNumericUpDown.KeyUp += new System.Windows.Forms.KeyEventHandler(this.HeightNumericUpDown_ValueChanged);
-          this.HeightNumericUpDown.MouseUp += new System.Windows.Forms.MouseEventHandler(this.HeightNumericUpDown_MouseUp);
+          this.HeightNumericUpDown.KeyUp += new System.Windows.Forms.KeyEventHandler(this.HeightChanged);
+          this.HeightNumericUpDown.MouseUp += new System.Windows.Forms.MouseEventHandler(this.HeightChanged);
           // 
           // aspectRaitoCheckBox
           // 
-          this.aspectRaitoCheckBox.AutoSize = true;
-          this.aspectRaitoCheckBox.Checked = true;
-          this.aspectRaitoCheckBox.CheckState = System.Windows.Forms.CheckState.Checked;
-          this.aspectRaitoCheckBox.Location = new System.Drawing.Point(12, 62);
-          this.aspectRaitoCheckBox.Name = "aspectRaitoCheckBox";
-          this.aspectRaitoCheckBox.Size = new System.Drawing.Size(124, 17);
-          this.aspectRaitoCheckBox.TabIndex = 6;
-          this.aspectRaitoCheckBox.Text = "&Maintain aspect ratio";
-          this.aspectRaitoCheckBox.UseVisualStyleBackColor = true;
-          this.aspectRaitoCheckBox.CheckedChanged += new System.EventHandler(this.aspectRaitoCheckBox_CheckedChanged);
+          this.aspectRatioCheckBox.AutoSize = true;
+          this.aspectRatioCheckBox.Checked = true;
+          this.aspectRatioCheckBox.CheckState = System.Windows.Forms.CheckState.Checked;
+          this.aspectRatioCheckBox.Location = new System.Drawing.Point(12, 62);
+          this.aspectRatioCheckBox.Name = "aspectRaitoCheckBox";
+          this.aspectRatioCheckBox.Size = new System.Drawing.Size(124, 17);
+          this.aspectRatioCheckBox.TabIndex = 6;
+          this.aspectRatioCheckBox.Text = "&Maintain aspect ratio";
+          this.aspectRatioCheckBox.UseVisualStyleBackColor = true;
+          this.aspectRatioCheckBox.CheckedChanged += new System.EventHandler(this.AspectRatioToggled);
           // 
           // Resize
           // 
@@ -154,7 +154,7 @@
           this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
           this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
           this.ClientSize = new System.Drawing.Size(192, 166);
-          this.Controls.Add(this.aspectRaitoCheckBox);
+          this.Controls.Add(this.aspectRatioCheckBox);
           this.Controls.Add(this.HeightNumericUpDown);
           this.Controls.Add(this.WidthNumericUpDown);
           this.Controls.Add(this.label4);
@@ -186,6 +186,6 @@
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.NumericUpDown WidthNumericUpDown;
         private System.Windows.Forms.NumericUpDown HeightNumericUpDown;
-        private System.Windows.Forms.CheckBox aspectRaitoCheckBox;
+        private System.Windows.Forms.CheckBox aspectRatioCheckBox;
     }
 }

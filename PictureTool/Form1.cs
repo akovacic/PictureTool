@@ -206,17 +206,13 @@ namespace PictureTool {
     }
 
     public void Sepia_Click(object sender, EventArgs e) {
-      if (canvas.Image != null) {
-        ApplySepia();
-        Changed();
-      }
+      ApplySepia();
+      Changed();
     }
 
     public void grayScale_Click(object sender, EventArgs e) {
-      if (canvas.Image != null) {
-        ApplyGrayscale();
-        Changed();
-      }
+      ApplyGrayscale();
+      Changed();
     }
 
     protected override void OnFormClosing(FormClosingEventArgs e) {
@@ -257,39 +253,19 @@ namespace PictureTool {
       resizeForm.ShowDialog();
     }
 
-    public void grayscaleToolStripMenuItem_Click(object sender, EventArgs e) {
-      if (canvas.Image != null) {
-        ApplyGrayscale();
-        Changed();
-      }
-    }
-
-    public void sepiaToolStripMenuItem_Click(object sender, EventArgs e) {
-      if (canvas.Image != null) {
-        ApplySepia();
-        Changed();
-      }
-    }
-
     public void toolStripMenuItem3times3_Click(object sender, EventArgs e) {
-      if (canvas.Image != null) {
-        ApplyTemplate(3, 3);
-        Changed();
-      }
+      ApplyTemplate(3, 3);
+      Changed();
     }
 
     public void toolStripMenuItem4times4_Click(object sender, EventArgs e) {
-      if (canvas.Image != null) {
-        ApplyTemplate(4, 4);
-        Changed();
-      }
+      ApplyTemplate(4, 4);
+      Changed();
     }
 
     public void toolStripMenuItem5times5_Click(object sender, EventArgs e) {
-      if (canvas.Image != null) {
-        ApplyTemplate(5, 5);
-        Changed();
-      }
+      ApplyTemplate(5, 5);
+      Changed();
     }
 
     public void customToolStripMenuItem_Click(object sender, EventArgs e) {

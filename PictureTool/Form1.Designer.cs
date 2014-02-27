@@ -478,14 +478,14 @@ namespace PictureTool
           this.grayscaleToolStripMenuItem.Name = "grayscaleToolStripMenuItem";
           this.grayscaleToolStripMenuItem.Size = new System.Drawing.Size(132, 22);
           this.grayscaleToolStripMenuItem.Text = "Grayscale";
-          this.grayscaleToolStripMenuItem.Click += new System.EventHandler(this.grayscaleToolStripMenuItem_Click);
+          this.grayscaleToolStripMenuItem.Click += new System.EventHandler(this.grayScale_Click);
           // 
           // sepiaToolStripMenuItem
           // 
           this.sepiaToolStripMenuItem.Name = "sepiaToolStripMenuItem";
           this.sepiaToolStripMenuItem.Size = new System.Drawing.Size(132, 22);
           this.sepiaToolStripMenuItem.Text = "Sepia";
-          this.sepiaToolStripMenuItem.Click += new System.EventHandler(this.sepiaToolStripMenuItem_Click);
+          this.sepiaToolStripMenuItem.Click += new System.EventHandler(this.Sepia_Click);
           // 
           // templatesToolStripMenuItem
           // 
