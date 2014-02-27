@@ -99,6 +99,7 @@ namespace PictureTool {
       if (history.Count == 1) {
         undoButtonQuick.Enabled = false;
         undoButtonMenu.Enabled = false;
+        dirty = false;
       }
     }
 
