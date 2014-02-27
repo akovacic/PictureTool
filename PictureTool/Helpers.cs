@@ -92,7 +92,7 @@ namespace PictureTool {
     public void Undo() {
       if (history.Count > 1) {
         history.Pop();
-        ChangeImage(history.Peek());
+        ChangeImage(new Bitmap(history.Peek()));
       }
 
       if (history.Count == 1) {
