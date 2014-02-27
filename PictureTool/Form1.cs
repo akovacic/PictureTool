@@ -213,7 +213,7 @@ namespace PictureTool {
             if (fill) graphics.FillEllipse(new SolidBrush(color), frame);
             break;
           case Tool.Crop:
-            if (start != end) {
+            if (start.X != end.X && start.Y!=end.Y && start.X<canvas.Width && start.Y<canvas.Height && end.X < canvas.Width && end.Y < canvas.Height ) {
               frame = PointRectangle(start, end);
               ChangeImage(((Bitmap)canvas.Image).Clone(frame, ((Bitmap)canvas.Image).PixelFormat));
             }
