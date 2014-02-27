@@ -21,7 +21,7 @@ namespace PictureTool {
 
     private void NewImage() {
       canvas.Refresh();
-      canvas.Image = Image.FromFile("C:\\PictureTool\\blank.jpg");
+      canvas.Image = new Bitmap(canvas.Size.Width, canvas.Size.Height);
       graphics = Graphics.FromImage(canvas.Image);
       this.Text = "untitled";
 
@@ -82,7 +82,7 @@ namespace PictureTool {
       undoButtonMenu.Enabled = false;
     }
 
-    private void Changed() {
+    public void Changed() {
       history.Push(graphics.Save());
       undoButtonQuick.Enabled = true;
       undoButtonMenu.Enabled = true;

@@ -111,7 +111,6 @@
       this.AcceptButton = this.OKButton;
       this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
       this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-      this.CancelButton = this.CancelButton;
       this.ClientSize = new System.Drawing.Size(192, 166);
       this.Controls.Add(this.CancelButton);
       this.Controls.Add(this.OKButton);
@@ -119,6 +118,8 @@
       this.Controls.Add(this.label2);
       this.Controls.Add(this.rowsNumericUpDown);
       this.Controls.Add(this.label1);
+      this.MaximizeBox = false;
+      this.MinimizeBox = false;
       this.Name = "Template";
       this.Text = "Template";
       ((System.ComponentModel.ISupportInitialize)(this.rowsNumericUpDown)).EndInit();

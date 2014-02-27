@@ -38,6 +38,7 @@ namespace PictureTool
           Image newImage = pictureTool.canvas.Image;
           pictureTool.canvas.Size = new Size(width, height);
           if (newImage != null) pictureTool.canvas.Image = new Bitmap(newImage, pictureTool.canvas.Size);
+          pictureTool.Changed();
           this.Close();     
         }
 

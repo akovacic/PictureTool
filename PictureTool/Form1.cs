@@ -274,21 +274,21 @@ namespace PictureTool {
     private void toolStripMenuItem3times3_Click(object sender, EventArgs e) {
       if (canvas.Image != null) {
         ApplyTemplate(3, 3);
-        // Changed();
+        Changed();
       }
     }
 
     private void toolStripMenuItem4times4_Click(object sender, EventArgs e) {
       if (canvas.Image != null) {
         ApplyTemplate(4, 4);
-        // Changed();
+        Changed();
       }
     }
 
     private void toolStripMenuItem5times5_Click(object sender, EventArgs e) {
       if (canvas.Image != null) {
         ApplyTemplate(5, 5);
-        // Changed();
+        Changed();
       }
     }
 

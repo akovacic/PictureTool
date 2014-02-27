@@ -21,6 +21,7 @@ namespace PictureTool {
 
       if (pictureTool.canvas.Image != null) {
         pictureTool.ApplyTemplate(rows, columns);
+        pictureTool.Changed();
       }
 
       this.Close();

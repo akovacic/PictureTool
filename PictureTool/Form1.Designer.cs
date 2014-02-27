@@ -71,11 +71,11 @@ namespace PictureTool
           this.grayscaleToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
           this.sepiaToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
           this.templatesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-          this.menu = new System.Windows.Forms.MenuStrip();
           this.toolStripMenuItem3times3 = new System.Windows.Forms.ToolStripMenuItem();
           this.toolStripMenuItem4times4 = new System.Windows.Forms.ToolStripMenuItem();
           this.toolStripMenuItem5times5 = new System.Windows.Forms.ToolStripMenuItem();
           this.customToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+          this.menu = new System.Windows.Forms.MenuStrip();
           this.toolbar.SuspendLayout();
           this.quickbar.SuspendLayout();
           this.colorbar.SuspendLayout();
@@ -404,7 +404,7 @@ namespace PictureTool
           this.undoButtonMenu.Image = ((System.Drawing.Image)(resources.GetObject("undoButtonMenu.Image")));
           this.undoButtonMenu.Name = "undoButtonMenu";
           this.undoButtonMenu.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.Z)));
-          this.undoButtonMenu.Size = new System.Drawing.Size(148, 22);
+          this.undoButtonMenu.Size = new System.Drawing.Size(152, 22);
           this.undoButtonMenu.Text = "Undo";
           this.undoButtonMenu.Click += new System.EventHandler(this.undoButton_Click);
           // 
@@ -421,7 +421,7 @@ namespace PictureTool
           // resizeToolStripMenuItem
           // 
           this.resizeToolStripMenuItem.Name = "resizeToolStripMenuItem";
-          this.resizeToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+          this.resizeToolStripMenuItem.Size = new System.Drawing.Size(119, 22);
           this.resizeToolStripMenuItem.Text = "Resize";
           this.resizeToolStripMenuItem.Click += new System.EventHandler(this.resizeToolStripMenuItem_Click);
           // 
@@ -433,7 +433,7 @@ namespace PictureTool
             this.cW45ToolStripMenuItem,
             this.cCW45ToolStripMenuItem});
           this.rotateToolStripMenuItem.Name = "rotateToolStripMenuItem";
-          this.rotateToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+          this.rotateToolStripMenuItem.Size = new System.Drawing.Size(119, 22);
           this.rotateToolStripMenuItem.Text = "Rotate";
           // 
           // cW90ToolStripMenuItem
@@ -470,7 +470,7 @@ namespace PictureTool
             this.grayscaleToolStripMenuItem,
             this.sepiaToolStripMenuItem});
           this.effectsToolStripMenuItem.Name = "effectsToolStripMenuItem";
-          this.effectsToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+          this.effectsToolStripMenuItem.Size = new System.Drawing.Size(119, 22);
           this.effectsToolStripMenuItem.Text = "Effects";
           // 
           // grayscaleToolStripMenuItem
@@ -497,19 +497,6 @@ namespace PictureTool
           this.templatesToolStripMenuItem.Name = "templatesToolStripMenuItem";
           this.templatesToolStripMenuItem.Size = new System.Drawing.Size(68, 20);
           this.templatesToolStripMenuItem.Text = "Templates";
-          // 
-          // menu
-          // 
-          this.menu.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.fileToolStripMenuItem,
-            this.editToolStripMenuItem,
-            this.imageToolStripMenuItem,
-            this.templatesToolStripMenuItem});
-          this.menu.Location = new System.Drawing.Point(0, 0);
-          this.menu.Name = "menu";
-          this.menu.Size = new System.Drawing.Size(692, 24);
-          this.menu.TabIndex = 0;
-          this.menu.Text = "menuStrip1";
           // 
           // toolStripMenuItem3times3
           // 
@@ -538,6 +525,19 @@ namespace PictureTool
           this.customToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
           this.customToolStripMenuItem.Text = "Custom";
           this.customToolStripMenuItem.Click += new System.EventHandler(this.customToolStripMenuItem_Click);
+          // 
+          // menu
+          // 
+          this.menu.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.fileToolStripMenuItem,
+            this.editToolStripMenuItem,
+            this.imageToolStripMenuItem,
+            this.templatesToolStripMenuItem});
+          this.menu.Location = new System.Drawing.Point(0, 0);
+          this.menu.Name = "menu";
+          this.menu.Size = new System.Drawing.Size(692, 24);
+          this.menu.TabIndex = 0;
+          this.menu.Text = "menuStrip1";
           // 
           // Form1
           // 
