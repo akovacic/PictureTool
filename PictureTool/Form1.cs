@@ -21,12 +21,14 @@ namespace PictureTool {
     private Point start, current, end;
     private Graphics graphics;
     private Stack<GraphicsState> history = new Stack<GraphicsState>();
+    public bool useAspectRatio;
 
     public Form1() {
       InitializeComponent();
 
       tool = Tool.Pencil;
       color = Color.Black;
+      useAspectRatio = true;
     }
 
     private void Form1_Load(object sender, EventArgs e) {
