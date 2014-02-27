@@ -21,7 +21,7 @@ namespace PictureTool {
     }
 
     public void NewImage() {
-      ChangeImage(new Bitmap(canvas.Width, canvas.Height));
+      ChangeImage(new Bitmap(1000, 600));
       graphics.FillRectangle(new SolidBrush(Color.White), new Rectangle(canvas.Location, canvas.Size));
       this.Text = "untitled";
 
