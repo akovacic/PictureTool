@@ -168,6 +168,8 @@ namespace PictureTool {
     }
 
     public void ChangeImage(Image image) {
+      if (graphics != null) graphics.Dispose();
+      if (canvas.Image != null) canvas.Image.Dispose();
       canvas.Image = image;
       graphics = Graphics.FromImage(canvas.Image);
     }

@@ -12,7 +12,7 @@ using System.Drawing.Drawing2D;
 
 namespace PictureTool {
   public partial class Form1 : Form {
-    public enum Tool { Pencil, Brush, Line, Rectangle, Ellipse, Eraser };
+    public enum Tool { Pencil, Brush, Line, Rectangle, Ellipse, Eraser, Crop };
 
     public bool draw, fill, dirty;
     public Color color;
@@ -76,7 +76,13 @@ namespace PictureTool {
       eraserButton.Checked = true;
     }
 
-    public void fillButton_Click(object sender, EventArgs e) {
+    private void cropButton_Click(object sender, EventArgs e) {
+      tool = Tool.Crop; size = 1;
+      ResetToolSelection();
+      cropButton.Checked = true;
+    }
+
+    private void fillButton_Click(object sender, EventArgs e) {
       fill = true;
       fillButton.Checked = true;
       noFillButton.Checked = false;
@@ -95,6 +101,7 @@ namespace PictureTool {
       rectangleButton.Checked = false;
       ellipseButton.Checked = false;
       eraserButton.Checked = false;
+      cropButton.Checked = false;
 
       if (tool == Tool.Rectangle || tool == Tool.Ellipse) {
         toolStripLabel1.Visible = true;
@@ -172,6 +179,13 @@ namespace PictureTool {
           case Tool.Eraser:
             graphics.FillRectangle(new SolidBrush(Color.White), current.X - size / 2, current.Y - size / 2, size, size);
             break;
+          case Tool.Crop:
+            frame = PointRectangle(start, end);
+            float[] dashValues = { 5, 2, 15, 4 };
+            pen = new Pen(Color.Black, 2);
+            pen.DashPattern = dashValues;
+            canvas.CreateGraphics().DrawRectangle(pen, frame);
+            break;
         }
 
         if (tool != Tool.Line && tool != Tool.Rectangle && tool != Tool.Ellipse) canvas.Invalidate();
@@ -197,10 +211,13 @@ namespace PictureTool {
             graphics.DrawEllipse(pen, frame);
             if (fill) graphics.FillEllipse(new SolidBrush(color), frame);
             break;
+          case Tool.Crop:
+            frame = PointRectangle(start, end);
+            ChangeImage(((Bitmap)canvas.Image).Clone(frame, ((Bitmap)canvas.Image).PixelFormat));
+            break;
         }
 
         draw = false;
-        canvas.Invalidate();
         Changed();
       }
     }
@@ -274,5 +291,7 @@ namespace PictureTool {
       templateForm.Location = new Point(200, 200);
       templateForm.ShowDialog();
     }
+
+   
   }
 }
